@@ -3,6 +3,7 @@
 #include <limits.h>
 #include <string.h>
 
+void mx_printstr(const char *str);
 void mx_print_strarr (char **arr, const char *delim);
 void mx_swap_char (char *s1, char *s2);
 void mx_print_unicode (wchar_t c);
@@ -157,7 +158,7 @@ int main (int argc, char **argv) {
             mx_print_strarr(arr, &c);
             char *s1 = " Knock, knock, Neo. ";
             char **arr1 = mx_strsplit(s1, ' ');
-            mx_print_strarr(arr1, &c);
+            mx_print_strarr(arr1, &c);            
     } else {
             printf("There is no such function in test list.\n");
     }

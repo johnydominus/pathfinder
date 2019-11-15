@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 void mx_printstr(const char *s);
 
@@ -9,10 +10,9 @@ void mx_print_strarr(char **arr, const char *delim){
         
         while(arr[i]){
             if(i > 0)
-                mx_printstr(delim);
+                write(1, delim, 1);
             
-            mx_printstr(arr[i]);
-            i++;
+            mx_printstr(arr[i++]);
         }
         mx_printstr("\n");
     }

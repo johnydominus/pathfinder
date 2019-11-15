@@ -1,30 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-char *mx_strtrim_delim (const char *s, const char delim);
-char *mx_strndup (const char *s, size_t n);
-int mx_count_words (const char *s, char delimiter);
-int mx_strlen_delim (const char *s, char delim);
+int mx_count_words(const char *str, char c);
+int mx_strlen(const char *str);
+int mx_strlen_delim(const char *str, char c);
+char *mx_strncpy(char *dst, const char *src, int len);
+int mx_get_char_index(const char *str, char c);
+char *mx_strndup(const char *s, size_t n);
+char *mx_strdup(const char *s);
 
-char **mx_strsplit (const char *s, char c) {
-    char **arr = NULL;
+char **mx_strsplit(const char *s, char c) {
+    if (!s)
+        return NULL;
+
+    int size_arr = mx_count_words(s, c);
+    char **result = malloc(sizeof(char *) * (size_arr + 1));
+    int len = 0;
     int i = 0;
-    int j = 0;
 
-    char *s_trim = mx_strtrim_delim(s, c);
-
-    printf("1\n");
-    while (s_trim[i]) {
-        if (s_trim[i] != c){
-            arr[j++] = mx_strndup(&s_trim[i], mx_strlen_delim(&s_trim[i], c));
-            printf("2\n");
-            i += mx_strlen_delim(&s_trim[i], c);
-        } else {
-            i++;
-            printf("3\n");
-        }
+    for (int j = 0; j < size_arr; ++j) {
+        while (s[i] == c && s[i++]) {}
+        len = mx_strlen_delim (&s[i], c);
+        result[j] = mx_strndup(&s[i], len);
+        i += len;
+        len = 0;
     }
-    printf("4\n");
-    arr[j] = NULL;
 
-    return arr;
+    result[size_arr] = NULL;
+    return result;
 }
