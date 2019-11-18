@@ -35,8 +35,8 @@ STRING PACK
     mx_del_extra_spaces V
     mx_strsplit         V
     mx_strjoin          V 
-    mx_file_to_str       
-    mx_read_line        
+    mx_file_to_str      V  
+    mx_read_line         
     mx_replace_substr    
 MEMORY PACK
     mx_memset           
@@ -52,8 +52,8 @@ LIST PACK
     s_list              V
     mx_create_node      V
     mx_push_front       V
-    mx_push_back         
-    mx_pop_front        
-    mx_pop_back         
+    mx_push_back        V
+    mx_pop_front        V
+    mx_pop_back         V
     mx_list_size        V
-    mx_sort_list         
+    mx_sort_list        V 

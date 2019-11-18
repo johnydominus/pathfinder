@@ -2,6 +2,8 @@
 #include <wchar.h>
 #include <limits.h>
 #include <string.h>
+#include <stdbool.h>
+#include "list.h"
 
 void mx_printstr(const char *str);
 void mx_print_strarr (char **arr, const char *delim);
@@ -12,6 +14,9 @@ char *mx_itoa (int n);
 double mx_pow (double n, unsigned int pow);
 void mx_strdel (char **str);
 void *mx_strnew (const char size);
+void mx_pop_back (t_list **head);
+void mx_pop_front (t_list **head);
+void mx_push_back (t_list **list, void *data);
 int mx_get_char_index (const char *str, char c);
 char *mx_strncpy (char *dst, const char *src, int len);
 char *mx_strcpy (char *dst, const char *src);
@@ -23,10 +28,22 @@ char *mx_del_extra_spaces(const char *s);
 char *mx_strjoin (const char *s1, const char *s2);
 char *mx_strstr (const char *haystack, const char *needle);
 char **mx_strsplit (const char *s, char c);
+char *mx_file_to_str (const char *filename);
 int mx_quicksort (char **arr, int left, int right);
 int mx_get_substr_index (const char *str, const char *sub);
 int mx_count_substr (const char *str, const char *sub);
 int mx_strlen_delim (const char *s, char delim);
+int mx_strcmp (const char *s1, const char *s2);
+t_list *mx_create_node (void *data);
+t_list *mx_sort_list (t_list *lst, bool (*cmp)(void *, void *));
+
+bool cmp_char (void *a, void *b) {
+    if (mx_strcmp((char*)a, (char*)b) > 0)
+        return true;
+    else
+        return false;
+}
+
 
 int main (int argc, char **argv) {
     if (argc < 2) {
@@ -159,6 +176,100 @@ int main (int argc, char **argv) {
             char *s1 = " Knock, knock, Neo. ";
             char **arr1 = mx_strsplit(s1, ' ');
             mx_print_strarr(arr1, &c);            
+    } else if (!strcmp(argv[1], "mx_file_to_str")) {
+            printf("%s", mx_file_to_str("afile"));
+    } else if (!strcmp(argv[1], "mx_pop_back")) {
+            char *s1 = "first"; 
+            char *s2 = "second";
+            t_list *aList = mx_create_node(s1);
+            aList->next = mx_create_node(s2);
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");
+            mx_pop_back(&aList);
+            printf("mx_pop_back function used.\n");
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");         
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");             
+    } else if (!strcmp(argv[1], "mx_pop_front")) {
+            char *s1 = "first";
+            char *s2 = "second";
+            t_list *aList = mx_create_node(s1);
+            aList->next = mx_create_node(s2);
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");
+            mx_pop_front(&aList);
+            printf("mx_pop_front function used.\n");
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");
+    } else if (!strcmp(argv[1], "mx_push_back")) {
+            char *s1 = "first";
+            char *s2 = "second";
+            t_list *aList = mx_create_node(s1);
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");
+            mx_push_back(&aList, s2);
+            printf("mx_push_back function used.\n");
+            if(aList)
+                printf("%s\n", aList->data);
+            else
+                printf("There is no list.\n");
+            if(aList->next)
+                printf("%s\n", aList->next->data);
+            else
+                printf("There is no second list.\n");
+    } else if (!strcmp(argv[1], "mx_sort_list")) {
+            char *s1 = "Allan";
+            char *s2 = "Bob";
+            char *s3 = "Clark";
+            char *s4 = "Frank";
+
+            t_list *aList = mx_create_node(s3);
+            t_list *temp = aList;
+            aList->next = mx_create_node(s2);
+            aList->next->next = mx_create_node(s4);
+            aList->next->next->next = mx_create_node(s1);
+            
+            while (temp) {
+                printf ("%s\n", temp->data);
+                temp = temp->next;
+            }
+
+            mx_sort_list(aList, cmp_char);
+            printf("mx_sort_list function used.\n");
+            temp = aList;
+            while (temp) {
+                printf ("%s\n", temp->data);
+                temp = temp->next;
+            }
     } else {
             printf("There is no such function in test list.\n");
     }
