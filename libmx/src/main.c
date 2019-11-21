@@ -3,6 +3,7 @@
 #include <limits.h>
 #include <string.h>
 #include <stdbool.h>
+#include <fcntl.h>
 #include "list.h"
 
 void mx_printstr(const char *str);
@@ -14,9 +15,13 @@ char *mx_itoa (int n);
 double mx_pow (double n, unsigned int pow);
 void mx_strdel (char **str);
 void *mx_strnew (const char size);
+void *mx_memset (void *b, int c, size_t len);
+void *mx_memcpy (void *restrict dst, const void *restrict src, size_t n);
+void *mx_memccpy (void *restrict dst, const void *restrict src, int c, size_t n);
 void mx_pop_back (t_list **head);
 void mx_pop_front (t_list **head);
 void mx_push_back (t_list **list, void *data);
+int mx_memcmp (const void *s1, const void *s2, size_t n);
 int mx_get_char_index (const char *str, char c);
 char *mx_strncpy (char *dst, const char *src, int len);
 char *mx_strcpy (char *dst, const char *src);
@@ -29,11 +34,13 @@ char *mx_strjoin (const char *s1, const char *s2);
 char *mx_strstr (const char *haystack, const char *needle);
 char **mx_strsplit (const char *s, char c);
 char *mx_file_to_str (const char *filename);
+char *mx_replace_substr (const char *str, const char *sub, const char *replace);
 int mx_quicksort (char **arr, int left, int right);
 int mx_get_substr_index (const char *str, const char *sub);
 int mx_count_substr (const char *str, const char *sub);
 int mx_strlen_delim (const char *s, char delim);
 int mx_strcmp (const char *s1, const char *s2);
+int mx_read_line (char **lineptr, size_t buf_size, char delm, const int fd);
 t_list *mx_create_node (void *data);
 t_list *mx_sort_list (t_list *lst, bool (*cmp)(void *, void *));
 
@@ -176,9 +183,9 @@ int main (int argc, char **argv) {
             char *s1 = " Knock, knock, Neo. ";
             char **arr1 = mx_strsplit(s1, ' ');
             mx_print_strarr(arr1, &c);            
-    } else if (!strcmp(argv[1], "mx_file_to_str")) {
+    } else if (!strcmp(argv[1], "mx_file_to_str")) {            //MX_FILE_TO_STR
             printf("%s", mx_file_to_str("afile"));
-    } else if (!strcmp(argv[1], "mx_pop_back")) {
+    } else if (!strcmp(argv[1], "mx_pop_back")) {               //MX_POP_BACK
             char *s1 = "first"; 
             char *s2 = "second";
             t_list *aList = mx_create_node(s1);
@@ -201,7 +208,7 @@ int main (int argc, char **argv) {
                 printf("%s\n", aList->next->data);
             else
                 printf("There is no second list.\n");             
-    } else if (!strcmp(argv[1], "mx_pop_front")) {
+    } else if (!strcmp(argv[1], "mx_pop_front")) {              //MX_POP_FRONT
             char *s1 = "first";
             char *s2 = "second";
             t_list *aList = mx_create_node(s1);
@@ -224,7 +231,7 @@ int main (int argc, char **argv) {
                 printf("%s\n", aList->next->data);
             else
                 printf("There is no second list.\n");
-    } else if (!strcmp(argv[1], "mx_push_back")) {
+    } else if (!strcmp(argv[1], "mx_push_back")) {              //MX_PUSH_BACK
             char *s1 = "first";
             char *s2 = "second";
             t_list *aList = mx_create_node(s1);
@@ -246,11 +253,11 @@ int main (int argc, char **argv) {
                 printf("%s\n", aList->next->data);
             else
                 printf("There is no second list.\n");
-    } else if (!strcmp(argv[1], "mx_sort_list")) {
+    } else if (!strcmp(argv[1], "mx_sort_list")) {              //MX_SORT_LIST
             char *s1 = "Allan";
             char *s2 = "Bob";
             char *s3 = "Clark";
-            char *s4 = "Frank";
+            char *s4 = "fourth";
 
             t_list *aList = mx_create_node(s3);
             t_list *temp = aList;
@@ -270,6 +277,68 @@ int main (int argc, char **argv) {
                 printf ("%s\n", temp->data);
                 temp = temp->next;
             }
+    } else if (!strcmp(argv[1], "mx_replace_substr")) {         //MX_REPLACE_SUBSTR
+            char *str1 = "McDonalds";
+            char *sub1 = "alds";
+            char *replace1 = "uts";
+            printf ("%s\n%s\n%s\n", str1, sub1, replace1);
+            printf ("%s\n", mx_replace_substr(str1, sub1, replace1));
+            char *str2 = "Ururu turu";
+            char *sub2 = "ru";
+            char *replace2 = "ta";
+            printf ("%s\n%s\n%s\n", str2, sub2, replace2);
+            printf ("%s\n", mx_replace_substr(str2, sub2, replace2));
+    } else if (!strcmp(argv[1], "mx_read_line")) {              //MX_READ_LINE
+            int fd = open("fragment", O_RDONLY);
+            char *str = NULL;
+            int res;
+            res = mx_read_line(&str, 20, 'f', fd);
+            printf("%s\n%d\n", str, res);
+            res = mx_read_line(&str, 35, 't', fd);
+            printf("%s\n%d\n", str, res);
+            res = mx_read_line(&str, 4, 'z', fd);
+            printf("%s\n%d\n", str, res);
+    } else if (!strcmp(argv[1], "mx_memset")) {                 //MX_MEMSET
+            char str[50];
+
+            mx_strcpy(str, "This is libmx.h library function");
+            puts(str);
+
+            mx_memset(str, '$', 7);
+            puts(str);
+    } else if (!strcmp(argv[1], "mx_memcpy")) {                 //MX_MEMCPY
+            char dst[] = "This is destination string.";
+            char src[] = "NO MORE ";
+
+            puts(dst);
+
+            mx_memcpy(dst, src, 8);
+            puts(dst);
+    } else if (!strcmp(argv[1], "mx_memccpy")) {                //MX_MEMCCPY
+            char string1[60] = "Taj Mahal is a historic monument in India.";
+            char buffer[61];
+            char *pdest;
+            printf("Function: _memccpy 42 characters or to character 'c'\n");
+            printf("Source: %s\n", string1);
+            pdest = mx_memccpy(buffer, string1, 'c', 42);
+            *pdest = '\0';
+            printf("Result: %s\n", buffer);
+            printf("Length: %lu characters\n", strlen(buffer));
+            printf("----------------\n");
+            char *msg = "This is the string: not copied";
+            char buffer1[80];
+            mx_memset(buffer1, '\0', 80);
+            mx_memccpy(buffer1, msg, ':', 80);
+            printf("%s\n", buffer1);
+    } else if (!strcmp(argv[1], "mx_memcmp")) {
+            unsigned char src[15] = "1234567890";
+            unsigned char dst[15] = "1234567890";
+            int res;
+
+            if ((res = mx_memcmp(src, dst, 10)) == 0)
+                puts ("Memory areas are identical");
+            else 
+                printf ("Memory areas differ.\n%d\n", res);
     } else {
             printf("There is no such function in test list.\n");
     }
