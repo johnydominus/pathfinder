@@ -1,16 +1,8 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-char *mx_strjoin (const char *str1, const char *str2);
-void mx_strdel (char **str);
-char *mx_strdup(const char *str);
-int mx_get_char_index (const char *str, char delim);
-int mx_strlen (const char *str);
+#include "libmx.h"
 
 static char *get_leaving(int buf_size, char delim, const int fd);
 
-int mx_read_line (char **lineptr, size_t buf_size, char delim, const int fd) {
+int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
     if (fd < 0 || fd > 4096 || buf_size < 1 || read(fd, 0, 0) < 0)
         return -2;
 
@@ -34,7 +26,7 @@ int mx_read_line (char **lineptr, size_t buf_size, char delim, const int fd) {
         return mx_strlen(*lineptr);
 }
 
-static char *get_leaving (int buf_size, char delim, const int fd) {
+static char *get_leaving(int buf_size, char delim, const int fd) {
     char *tmp = NULL;
     char *res = NULL;
     char buf[buf_size + 1];

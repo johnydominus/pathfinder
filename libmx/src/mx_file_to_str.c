@@ -1,12 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include "libmx.h"
 
-int mx_strlen(const char *str);
-char *mx_strnew(const int length);
-
-char *mx_file_to_str(const char* filename){
+char *mx_file_to_str(const char* filename) {
     int fd_dst = open(filename, O_RDWR | O_EXCL, 0666);
     if(fd_dst < 0) 
         return NULL;

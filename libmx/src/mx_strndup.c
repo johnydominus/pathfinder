@@ -1,9 +1,6 @@
-#include <stdio.h>
+#include "libmx.h"
 
-char *mx_strnew (const int size);
-char *mx_strncpy (char *dst, const char *src, size_t size);
-
-char *mx_strndup (const char *s1, size_t n) {
+char *mx_strndup(const char *s1, size_t n) {
     char *new_str = mx_strnew(n * sizeof(char));
 
     unsigned long i = 0;

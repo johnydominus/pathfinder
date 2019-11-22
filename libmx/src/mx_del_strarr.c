@@ -1,6 +1,4 @@
-#include <stdlib.h>
-
-void mx_strdel(char **str);
+#include "libmx.h"
 
 void mx_del_strarr(char ***arr) {
     char **temp = *arr;

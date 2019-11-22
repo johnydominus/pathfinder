@@ -1,8 +1,4 @@
-#include <stdio.h>
-
-int mx_strlen (const char *s);
-char *mx_strnew (const int size);
-char *mx_strndup (const char *s1, size_t n);
+#include "libmx.h"
 
 char *mx_strtrim_delim (const char *str, const char delim) {
     int st_delims = 0;

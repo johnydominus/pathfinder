@@ -1,48 +1,5 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <limits.h>
+#include "libmx.h"
 #include <string.h>
-#include <stdbool.h>
-#include <fcntl.h>
-#include "list.h"
-
-void mx_printstr(const char *str);
-void mx_print_strarr (char **arr, const char *delim);
-void mx_swap_char (char *s1, char *s2);
-void mx_print_unicode (wchar_t c);
-void mx_str_reverse (char *s);
-char *mx_itoa (int n);
-double mx_pow (double n, unsigned int pow);
-void mx_strdel (char **str);
-void *mx_strnew (const char size);
-void *mx_memset (void *b, int c, size_t len);
-void *mx_memcpy (void *restrict dst, const void *restrict src, size_t n);
-void *mx_memccpy (void *restrict dst, const void *restrict src, int c, size_t n);
-void mx_pop_back (t_list **head);
-void mx_pop_front (t_list **head);
-void mx_push_back (t_list **list, void *data);
-int mx_memcmp (const void *s1, const void *s2, size_t n);
-int mx_get_char_index (const char *str, char c);
-char *mx_strncpy (char *dst, const char *src, int len);
-char *mx_strcpy (char *dst, const char *src);
-char *mx_strndup (const char *s1, size_t n);
-char *mx_strstr (const char *haystack, const char *needle);
-char *mx_strtrim (const char *str);
-char *mx_strtrim_delim (const char *str, const char delim);
-char *mx_del_extra_spaces(const char *s);
-char *mx_strjoin (const char *s1, const char *s2);
-char *mx_strstr (const char *haystack, const char *needle);
-char **mx_strsplit (const char *s, char c);
-char *mx_file_to_str (const char *filename);
-char *mx_replace_substr (const char *str, const char *sub, const char *replace);
-int mx_quicksort (char **arr, int left, int right);
-int mx_get_substr_index (const char *str, const char *sub);
-int mx_count_substr (const char *str, const char *sub);
-int mx_strlen_delim (const char *s, char delim);
-int mx_strcmp (const char *s1, const char *s2);
-int mx_read_line (char **lineptr, size_t buf_size, char delm, const int fd);
-t_list *mx_create_node (void *data);
-t_list *mx_sort_list (t_list *lst, bool (*cmp)(void *, void *));
 
 bool cmp_char (void *a, void *b) {
     if (mx_strcmp((char*)a, (char*)b) > 0)
@@ -50,7 +7,6 @@ bool cmp_char (void *a, void *b) {
     else
         return false;
 }
-
 
 int main (int argc, char **argv) {
     if (argc < 2) {
@@ -330,7 +286,7 @@ int main (int argc, char **argv) {
             mx_memset(buffer1, '\0', 80);
             mx_memccpy(buffer1, msg, ':', 80);
             printf("%s\n", buffer1);
-    } else if (!strcmp(argv[1], "mx_memcmp")) {
+    } else if (!strcmp(argv[1], "mx_memcmp")) {                 //MX_MEMCMP
             unsigned char src[15] = "1234567890";
             unsigned char dst[15] = "1234567890";
             int res;
@@ -339,6 +295,27 @@ int main (int argc, char **argv) {
                 puts ("Memory areas are identical");
             else 
                 printf ("Memory areas differ.\n%d\n", res);
+    } else if (!strcmp (argv[1], "mx_memchr")) {                //MX_MEMCHR
+            printf("%s\n", mx_memchr("Trinity", 'i', 7));
+            printf("%s\n", mx_memchr("Trinity", 'M', 7));
+    } else if (!strcmp (argv[1], "mx_memrchr")) {               //MX_MEMRCHR
+            printf("%s\n", mx_memrchr("Trinity", 'i', 7));
+            printf("%s\n", mx_memrchr("Trinity", 'M', 7));
+    } else if (!strcmp (argv[1], "mx_memmem")) {                //MX_MEMMEM
+            const char *largestring = "Foo Bar Baz";
+            const char *smallstring = "Bar";
+            const char *bam = "Baraban";
+            char *ptr = NULL;
+
+            ptr = mx_memmem (largestring, 11, bam, 7);
+            printf("%s\n", ptr);
+            ptr = mx_memmem (largestring, 11, smallstring, 3);
+            printf("%s\n", ptr);
+            printf("%s\n", mx_memmem(largestring, 11, NULL, 0));
+    } else if (!strcmp (argv[1], "mx_memmove")) {               //MX_MEMMOVE
+            char src[100] = "Geeksfor";
+            mx_memmove (src+5, src, strlen(src)+1);
+            printf("%s\n", src); 
     } else {
             printf("There is no such function in test list.\n");
     }

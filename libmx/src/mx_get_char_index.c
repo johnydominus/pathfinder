@@ -1,12 +1,12 @@
-#include <stdlib.h>
+#include "libmx.h"
 
 int mx_get_char_index(const char *str, char c) {
     int cnt = 0;
     
-    if (str == NULL)
+    if(str == NULL)
         return -2;
 
-    while (str[cnt]) {
+    while(str[cnt]) {
         if(str[cnt] == c)
             return cnt;
         cnt++;    

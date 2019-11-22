@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-int mx_count_words(const char *str, char c);
-int mx_strlen(const char *str);
-int mx_strlen_delim(const char *str, char c);
-char *mx_strncpy(char *dst, const char *src, int len);
-int mx_get_char_index(const char *str, char c);
-char *mx_strndup(const char *s, size_t n);
-char *mx_strdup(const char *s);
+#include "libmx.h"
 
 char **mx_strsplit(const char *s, char c) {
     if (!s)

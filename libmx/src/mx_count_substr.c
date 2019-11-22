@@ -1,9 +1,6 @@
-#include <stdio.h>
+#include "libmx.h"
 
-int mx_strlen (const char *s);
-int mx_strncmp (const char *s, const char *s2, size_t n);
-
-int mx_count_substr (const char *str, const char *sub) {
+int mx_count_substr(const char *str, const char *sub) {
     if (!sub || !str)
         return -1;
 
@@ -13,8 +10,8 @@ int mx_count_substr (const char *str, const char *sub) {
 
     while (str[i]) {
         if(!mx_strncmp(&str[i], sub, sub_len))
-            cntr++;
-        i++;
+            ++cntr;
+        ++i;
     }
 
     return cntr;
