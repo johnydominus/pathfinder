@@ -11,18 +11,19 @@ char *mx_del_extra_spaces(const char *str) {
     if(!str)
         return NULL;
 
-    while (*pre) {
+    while(*pre) {
         if(mx_isspace(*pre))
             ++spaces;
         else
             spaces = 0;
 
-        if (spaces > 1) {}
+        if(spaces > 1) {}
         else 
             *iter++ = *pre;
-        
+  
         ++pre;
     }
+    
     return res;
 }
 
@@ -30,8 +31,8 @@ static int final_length(const char *s) {
     int spaces = 0;
     int len = 0;
 
-    while(*s){
-        if(spaces){}
+    while(*s) {
+        if(spaces) {}
         else
             ++len;
 

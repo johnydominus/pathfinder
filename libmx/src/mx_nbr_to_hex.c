@@ -3,7 +3,9 @@
 char *mx_nbr_to_hex(unsigned long nbr) {
     int cntr = 0;
     char hexadecimal[100];
-    char *res_str = mx_strnew(cntr);
+
+    if(nbr == 0)
+        return "0";
 
     while(nbr != 0) {
         if((nbr%16) < 10)
@@ -11,11 +13,12 @@ char *mx_nbr_to_hex(unsigned long nbr) {
         else 
             hexadecimal[cntr++] = 87 + (nbr%16);
         
-        nbr /=16;
+        nbr /= 16;
     }
 
-    for(int i = 0; i < cntr; i++)
-        res_str[i] = hexadecimal[cntr - 1 - i];
+    char *res_str = mx_strnew(cntr);
+    mx_strncpy(res_str, hexadecimal, cntr);
+    mx_str_reverse(res_str);
 
     return res_str;
 }

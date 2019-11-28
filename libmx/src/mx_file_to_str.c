@@ -2,39 +2,22 @@
 
 char *mx_file_to_str(const char* filename) {
     int fd_dst = open(filename, O_RDWR | O_EXCL, 0666);
+    char buf[128];
+    int cnt;
+    char *temp = NULL;
+    char *result = NULL;
+
     if(fd_dst < 0) 
         return NULL;
-
-    int rd;
-    int cntr = 0;
     
-    char buf[1];
-
-    while((rd = read(fd_dst, buf, 1)) && buf[0] != EOF){
-        if(rd < 0)
-            return NULL;
-        cntr++;
+    while((cnt = read(fd_dst, buf, sizeof(buf))) > 0) {
+        buf[cnt] = '\0';
+        temp = result;
+        result = mx_strjoin(result, buf);
+        free(temp);
     }
 
-    int cd = close(fd_dst);
-    if(cd == -1)
-        return NULL;
-
-    fd_dst = open(filename, O_RDONLY | O_EXCL, 0666);
-    if(fd_dst < 0)
-        return NULL;
-
-    char *new_str = mx_strnew(cntr);
-    if(!new_str)
-        return NULL;
-
-    rd = read(fd_dst, new_str, cntr);
-    if (rd == -1) 
-            return NULL;
-
-    cd = close(fd_dst);
-    if(cd < 0)
-        return NULL;
+    close(fd_dst);
     
-    return new_str;
+    return result;
 }

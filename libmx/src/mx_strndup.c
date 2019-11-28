@@ -1,16 +1,15 @@
 #include "libmx.h"
 
 char *mx_strndup(const char *s1, size_t n) {
-    char *new_str = mx_strnew(n * sizeof(char));
+    size_t len = mx_strlen(s1);
 
-    unsigned long i = 0;
-    while (i < n && s1[i]) {
-        new_str[i] = s1[i];
-        i++;
-    }
+    if(n < len)
+        len = n;
     
-    while (i <= n)
-        new_str[i++] = '\0';
+    char *new_str = mx_strnew(len * sizeof(char));
+    
+    if(!new_str)
+        return NULL;
 
-    return new_str;
+    return mx_strncpy(new_str, s1, len);
 }

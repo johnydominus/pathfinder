@@ -2,12 +2,10 @@
 
 char *mx_strjoin(const char *s1, const char *s2) {
     if(s1 && s2) {
-        int s1_len = mx_strlen(s1);
-        int s2_len = mx_strlen(s2);
-        char *res = mx_strnew((s1_len + s2_len) * sizeof(char*));
+        char *res = mx_strnew(mx_strlen(s1) + mx_strlen(s2));
 
-        mx_strncpy(res, s1, s1_len);
-        mx_strncpy(res + s1_len, s2, s2_len);
+        mx_strcpy(res, s1);
+        mx_strcat(res, s2);
         
         if (res)
             return res;
