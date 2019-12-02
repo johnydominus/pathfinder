@@ -31,7 +31,7 @@ mx_get_substr_index V
 mx_count_substr     V
 mx_count_words      s+
 mx_strnew           V
-mx_strtrim          s
+mx_strtrim          s+
 mx_del_extra_spaces X
 mx_strsplit         V
 mx_strjoin          s+
@@ -51,8 +51,8 @@ mx_realloc          V
     LIST PACK
 mx_create_node      V
 mx_push_front       V
-mx_push_back        X
-mx_pop_front        X
-mx_pop_back         X
+mx_push_back        X+
+mx_pop_front        X+
+mx_pop_back         X+
 mx_list_size        b
-mx_sort_list        X
+mx_sort_list        X+

@@ -3,10 +3,19 @@
 t_list *mx_create_node(void *data);
 
 void mx_push_back(t_list **list, void *data) {
-    t_list *buf = *list;
+    if(list == NULL) 
+        return;
 
-    while (buf->next)
-        buf->next = buf->next->next;
+    if(*list == NULL) {
+        *list = mx_create_node(data);
+        return;
+    }
+    else {
+        t_list *buf = *list;
 
-    buf->next = mx_create_node(data);
+        while (buf->next)
+            buf = buf->next;
+
+        buf->next = mx_create_node(data);
+    }
 }
