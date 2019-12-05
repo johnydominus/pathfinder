@@ -37,7 +37,7 @@ mx_strsplit         V
 mx_strjoin          s+
 mx_file_to_str      b+
 mx_read_line        b
-mx_replace_substr   b
+mx_replace_substr   b+
     MEMORY PACK
 mx_memset           V
 mx_memcpy           V
@@ -54,5 +54,5 @@ mx_push_front       V
 mx_push_back        X+
 mx_pop_front        X+
 mx_pop_back         X+
-mx_list_size        b
+mx_list_size        b+
 mx_sort_list        X+

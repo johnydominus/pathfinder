@@ -32,254 +32,296 @@ static void swap(char *s1, char *s2)
   }
 }
 
-int main () {
+int main (int argc, char *argv[]) {
+    if(argc < 2) {printf("usage:\n./test 'name of a function' //to test certain function\n./test all //to test all available functions\n");
+        return 0;
+    }
 
-    printf("----------------------\n|-----UTILS PACK-----|\n----------------------\n\n\n");     
+    if(!mx_strcmp(argv[1], "all")) {
+        printf("\n                        TESTING YOUR LIBRARY!\n\n");
+        printf("----------------------\n|-----UTILS PACK-----|\n----------------------\n");
+    }
 
-    printf("-----TESTING MX_PRINTCHAR-----\n\n");               //MX_PRINTCHAR
+    if(!mx_strcmp(argv[1], "mx_printchar") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_PRINTCHAR-----\n\n");               //MX_PRINTCHAR
 
-    char printmechar = 'l';
+        char printmechar = 'l';
 
-    printf("Test output:\n");
-    putchar(printmechar);
-    putchar('\n');
-    putchar('\n');
+        printf("Test output:\n");
+        putchar(printmechar);
+        putchar('\n');
+        putchar('\n');
 
-    printf("User output:\n");
-    mx_printchar(printmechar);
-    putchar('\n');
-
-    printf("\n\n-----TESTING MX_PRINT_UNICODE-----\n\n");       //MX_PRINT_UNICODE
-           
-    wchar_t c = 0x2605;
-
-    printf("Test output:\n");
+        printf("User output:\n");
+        mx_printchar(printmechar);
+        putchar('\n');
+    }
     
-    my_print_unicode(c);
-    putchar('\n');
-    putchar('\n');
+    if(!mx_strcmp(argv[1], "mx_print_unicode") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_PRINT_UNICODE-----\n\n");       //MX_PRINT_UNICODE
+            
+        wchar_t c = 0x2605;
 
-    printf("User output:\n");
-    mx_print_unicode(c);
-    putchar('\n');
+        printf("Test output:\n");
+        
+        my_print_unicode(c);
+        putchar('\n');
+        putchar('\n');
 
-    printf("\n\n-----TESTING MX_PRINTSTR-----\n\n");            //MX_PRINTSTR
+        printf("User output:\n");
+        mx_print_unicode(c);
+        putchar('\n');
+    }
 
-    char *printstr_s = "This is a test string";
+    if(!mx_strcmp(argv[1], "mx_printstr") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_PRINTSTR-----\n\n");            //MX_PRINTSTR
 
-    printf("Test output:\n");
-    printf("%s\n\n", printstr_s);
+        char *printstr_s = "This is a test string";
+
+        printf("Test output:\n");
+        printf("%s\n\n", printstr_s);
+        
+        printf("User output:\n");
+        mx_printstr(printstr_s);
+        putchar('\n');
+    }
     
-    printf("User output:\n");
-    mx_printstr(printstr_s);
-    putchar('\n');
+    if(!mx_strcmp(argv[1], "mx_print_strarr") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_PRINT_STRARR-----\n\n");        //MX_PRINT_STRARR
+                
+        char *arr1[] = {"Hello", "World!", "Baraban", NULL};
+        char *del = "*";
+                
+        printf("Test output:\n");
+        if(*arr1 == NULL || del == NULL) {}
+        else {
+            int i = 0;
+        
+            while(arr1[i]) {
+                if(i > 0)
+                    printf("%s", del);
 
-    printf("\n\n-----TESTING MX_PRINT_STRARR-----\n\n");        //MX_PRINT_STRARR
-            
-    char *arr1[] = {"Hello", "World!", "Baraban", NULL};
-    char *del = "*";
-            
-    printf("Test output:\n");
-    if(*arr1 == NULL || del == NULL) {}
-    else {
-        int i = 0;
-     
-        while(arr1[i]) {
-            if(i > 0)
-                printf("%s", del);
-
-            printf("%s", arr1[i++]);
+                printf("%s", arr1[i++]);
+            }
+            putchar('\n');
+            putchar('\n');
         }
+
+        printf("User output:\n"); 
+        mx_print_strarr(arr1, del);
         putchar('\n');
+    }
+
+    if(!mx_strcmp(argv[1], "mx_printint") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_PRINTINT-----\n\n");            //MX_PRINTINT
+        
+        int print_n = 153;
+        int print_m = INT_MAX;
+        int print_l = INT_MIN;
+        int print_z = 0;
+
+        printf("Test output:\n");
+        printf("%d\n%d\n%d\n%d\n\n", print_n, print_m, print_l, print_z);
+
+        printf("User output:\n");
+        mx_printint(print_n);
+        putchar('\n');
+        mx_printint(print_m);
+        putchar('\n');
+        mx_printint(print_l);
+        putchar('\n');
+        mx_printint(print_z);
         putchar('\n');
     }
 
-    printf("User output:\n"); 
-    mx_print_strarr(arr1, del);
-    putchar('\n');
+    if(!mx_strcmp(argv[1], "mx_pow") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_POW-----\n\n");                 //MX_POW
+        printf("Test output:\n");
+        printf("%.3f\n%.3f\n%.3f\n%.3f\n\n", pow(2,3), pow(5,0), pow(7.5, 3), pow(2,55));
 
-    printf("\n\n-----TESTING MX_PRINTINT-----\n\n");            //MX_PRINTINT
-    
-    int print_n = 153;
-    int print_m = INT_MAX;
-    int print_l = INT_MIN;
-    int print_z = 0;
-
-    printf("Test output:\n");
-    printf("%d\n%d\n%d\n%d\n\n", print_n, print_m, print_l, print_z);
-
-    printf("User output:\n");
-    mx_printint(print_n);
-    putchar('\n');
-    mx_printint(print_m);
-    putchar('\n');
-    mx_printint(print_l);
-    putchar('\n');
-    mx_printint(print_z);
-    putchar('\n');
-
-    printf("\n\n-----TESTING MX_POW-----\n\n");                 //MX_POW
-    printf("Test output:\n");
-    printf("%.3f\n%.3f\n%.3f\n%.3f\n\n", pow(2,3), pow(5,0), pow(7.5, 3), pow(2,55));
-
-    printf("User output:\n");
-    printf("%.3f\n%.3f\n%.3f\n%.3f\n", mx_pow(2,3), mx_pow(5,0), mx_pow(7.5, 3), mx_pow(2,55));
-
-    printf("\n\n-----TESTING MX_SQRT-----\n\n");                //MX_SQRT
-    printf("Test output:\n");
-    printf("%.0f\n%.0f\n%.0f\n\n", sqrt(25), sqrt(207025), sqrt(INT_MAX + 1));
-
-    printf("User output:\n");
-    printf("%d\n%d\n%d\n", mx_sqrt(25), mx_sqrt(207025), mx_sqrt(INT_MAX + 1));
-
-    printf("\n\n-----TESTING MX_NBR_TO_HEX-----\n\n");          //MX_NBR_TO_HEX
-
-    printf("Test output:\n");
-    printf("%s\n%s\n%s\n%s\n\n", my_nbr_to_hex(52), my_nbr_to_hex(1000), my_nbr_to_hex(0), my_nbr_to_hex(10));
-
-    printf("User output:\n");
-    printf("%s\n%s\n%s\n%s\n\n", mx_nbr_to_hex(52), mx_nbr_to_hex(1000), mx_nbr_to_hex(0), mx_nbr_to_hex(10));
-
-    printf("\n\n-----TESTING MX_ITOA-----\n\n");                //MX_ITOA
-
-    printf("Test output:\n");
-    printf("%s\n%s\n%s\n%s\n%s\n\n", my_itoa(0), 
-                                     my_itoa(INT_MIN), 
-                                     my_itoa(INT_MAX), 
-                                     my_itoa(-123), 
-                                     my_itoa(INT_MAX + 1));  
-
-    printf("User output:\n");
-    printf("%s\n%s\n%s\n%s\n%s\n\n", mx_itoa(0), 
-                                     mx_itoa(INT_MIN), 
-                                     mx_itoa(INT_MAX), 
-                                     mx_itoa(-123), 
-                                     mx_itoa(INT_MAX + 1));
-
-    printf("-----------------------\n|-----STRING PACK-----|\n-----------------------\n\n\n");
-
-    printf("\n\n-----TESTING MX_SWAP_CHAR-----\n\n");       //MX_SWAP_CHAR
-    char str1[] = "ONE";
-
-    printf("Test output:\n");
-    swap(&str1[0],&str1[1]);
-    printf("%s\n", str1);
-    swap(&str1[1], &str1[2]);
-    printf("%s\n\n", str1);
-
-    char str2[] = "ONE";    
-
-    printf("User output:\n");
-    mx_swap_char(&str2[0], &str2[1]);
-    printf("%s\n", str2);
-    mx_swap_char(&str2[1], &str2[2]);
-    printf("%s\n\n", str2);
-
-
-    printf("\n\n-----TESTING MX_STRTRIM-----\n\n");
-    char *name = "\f  My name... is Neo \t\n";
-    printf("Test output:\n");
-    printf("%s", name);
-    printf("My name... is Neo\n\n");
-
-    printf("User output:\n");
-    printf("%s", name);
-    printf("%s\n\n", mx_strtrim(name));
-
-
-    printf("\n\n-----TESTING MX_READ_LINE------\n\n");
-    int fd = open("fragment", O_RDONLY);
-    char *str = NULL;
-    int res;
-    
-    //NOTE!!! before starting the test create the "fragment" file with corresponding text
-
-    printf("Test output:\n");
-    printf("The hotel was abandoned a\n25\n\n0\ner a fire licked its way accross\n");
-    printf("the polyester carpeting, destroying several rooms as it\n");
-    printf("spooled soot up the walls and ceiling, leaving patterns of\n");
-    printf("permanent shadow\n163\n\n");
-
-    printf("User output:\n");
-
-    res = mx_read_line(&str, 20, 'f', fd);
-    printf("%s\n%d\n", str, res);
-    res = mx_read_line(&str, 35, 't', fd);
-    printf("%s\n%d\n", str, res);
-    res = mx_read_line(&str, 4, '.', fd);
-    printf("%s\n%d\n", str, res);
-    
-    printf("\n\n------TESTING MX_REPLACE_SUBSTR-----\n\n");
-
-    char *strn1 = "McDonalds";
-    char *sub1 = "ald";
-    char *replace1 = "ut";
-    
-    char *strn2 = "Ururu turu";
-    char *sub2 = "ru";
-    char *replace2 = "tas";
-
-    printf("Test output:\n");
-    printf("%s\n%s\n%s\n", strn1, sub1, replace1);
-    printf("McDonuts\n\n");
-    printf("%s\n%s\n%s\n", strn2, sub2, replace2);
-    printf("Utastas tutas\n\n");
-    
-    printf("User output:\n");
-    printf("%s\n%s\n%s\n", strn1, sub1, replace1);
-    printf("%s\n\n", mx_replace_substr(strn1, sub1, replace1));
-    printf("%s\n%s\n%s\n", strn2, sub2, replace2);
-    printf("%s\n", mx_replace_substr(strn2, sub2, replace2));
-
-    printf("\n\n-----TESTING MX_DEL_EXTRA_SPACES-----\n\n");
-
-    char *name1 = "\f   My name... \n   is \r Neo   \f\t";
-    printf("Test output:\n");
-    printf("%s\n", name1);
-    printf("My name... is Neo\n");
-
-    printf("User output:\n");
-    printf("%s\n", name1);
-    printf("%s\n", mx_del_extra_spaces(name1));
-
-    printf("\n\n-----TESTNG MX_SORT_LIST-----\n\n");        //MX_SORT_LIST
-    char *n1 = "Allan";
-    char *n2 = "Bob";
-    char *n3 = "Clark";
-    char *n4 = "Frank";
-
-    t_list *aList = mx_create_node(n3);
-    t_list *temp = aList;
-    aList->next = mx_create_node(n2);
-    aList->next->next = mx_create_node(n4);
-    aList->next->next->next = mx_create_node(n1);    
-
-    printf("Test output:\n");
-    while (temp) {
-        printf ("%s\n", temp->data);
-        temp = temp->next;
-    }
-    printf("\nmx_sort_list function used\n\n%s\n%s\n%s\n%s\n\n\n", n1, n2, n3, n4);
-
-    printf("User output:\n");
-    temp = aList;
-    while(temp) {
-        printf("%s\n", temp->data);
-        temp = temp->next;
+        printf("User output:\n");
+        printf("%.3f\n%.3f\n%.3f\n%.3f\n", mx_pow(2,3), mx_pow(5,0), mx_pow(7.5, 3), mx_pow(2,55));
     }
 
-    mx_sort_list(aList, cmp_char);
-    printf("\nmx_sort_list function used.\n\n");
-    temp = aList;
-    while (temp) {
-        printf ("%s\n", temp->data);
-        temp = temp->next;   
+    if(!mx_strcmp(argv[1], "mx_sqrt") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_SQRT-----\n\n");                //MX_SQRT
+        printf("Test output:\n");
+        printf("%.0f\n%.0f\n%.0f\n\n", sqrt(25), sqrt(207025), sqrt(INT_MAX + 1));
+
+        printf("User output:\n");
+        printf("%d\n%d\n%d\n", mx_sqrt(25), mx_sqrt(207025), mx_sqrt(INT_MAX + 1));
+
+        printf("\n\n-----TESTING MX_NBR_TO_HEX-----\n\n");          //MX_NBR_TO_HEX
+
+        printf("Test output:\n");
+        printf("%s\n%s\n%s\n%s\n\n", my_nbr_to_hex(52), my_nbr_to_hex(1000), my_nbr_to_hex(0), my_nbr_to_hex(10));
+
+        printf("User output:\n");
+        printf("%s\n%s\n%s\n%s\n\n", mx_nbr_to_hex(52), mx_nbr_to_hex(1000), mx_nbr_to_hex(0), mx_nbr_to_hex(10));
     }
 
-    if (0) {                    //MX_POW
-            printf("%.3f\n", mx_pow(7, 3));
+    if(!mx_strcmp(argv[1], "mx_itoa") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_ITOA-----\n\n");                //MX_ITOA
 
-    } else if (0) {            //MX_STR_REVERSE
+        printf("Test output:\n");
+        printf("%s\n%s\n%s\n%s\n%s\n\n", my_itoa(0), 
+                                        my_itoa(INT_MIN), 
+                                        my_itoa(INT_MAX), 
+                                        my_itoa(-123), 
+                                        my_itoa(INT_MAX + 1));  
+
+        printf("User output:\n");
+        printf("%s\n%s\n%s\n%s\n%s\n\n", mx_itoa(0), 
+                                        mx_itoa(INT_MIN), 
+                                        mx_itoa(INT_MAX), 
+                                        mx_itoa(-123), 
+                                        mx_itoa(INT_MAX + 1));
+    }
+
+    if(!mx_strcmp(argv[1], "all"))
+        printf("\n\n-----------------------\n|-----STRING PACK-----|\n-----------------------\n");
+
+    if(!mx_strcmp(argv[1], "mx_swap_char") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_SWAP_CHAR-----\n\n");       //MX_SWAP_CHAR
+        char str1[] = "ONE";
+
+        printf("Test output:\n");
+        swap(&str1[0],&str1[1]);
+        printf("%s\n", str1);
+        swap(&str1[1], &str1[2]);
+        printf("%s\n\n", str1);
+
+        char str2[] = "ONE";    
+
+        printf("User output:\n");
+        mx_swap_char(&str2[0], &str2[1]);
+        printf("%s\n", str2);
+        mx_swap_char(&str2[1], &str2[2]);
+        printf("%s\n\n", str2);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strtrim") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_STRTRIM-----\n\n");
+        char *name = "\f  My name... is Neo \t\n";
+        printf("Test output:\n");
+        printf("%s", name);
+        printf("My name... is Neo\n\n");
+
+        printf("User output:\n");
+        printf("%s", name);
+        printf("%s\n\n", mx_strtrim(name));
+    }
+
+    if(!mx_strcmp(argv[1], "mx_read_line") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_READ_LINE------\n\n");
+        int fd = open("fragment", O_RDONLY);
+        char *str = NULL;
+        int res;
+        
+        //NOTE!!! before starting the test create the "fragment" file with corresponding text
+
+        printf("Test output:\n");
+        printf("The hotel was abandoned a\n25\n\n0\ner a fire licked its way accross\n");
+        printf("the polyester carpeting, destroying several rooms as it\n");
+        printf("spooled soot up the walls and ceiling, leaving patterns of\n");
+        printf("permanent shadow\n163\n\n");
+
+        printf("User output:\n");
+
+        res = mx_read_line(&str, 20, 'f', fd);
+        printf("%s\n%d\n", str, res);
+        res = mx_read_line(&str, 35, 't', fd);
+        printf("%s\n%d\n", str, res);
+        res = mx_read_line(&str, 4, '.', fd);
+        printf("%s\n%d\n", str, res);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_replace_substr") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n------TESTING MX_REPLACE_SUBSTR-----\n\n");
+
+        char *strn1 = "McDonalds";
+        char *sub1 = "ald";
+        char *replace1 = "ut";
+        
+        char *strn2 = "Ururu turu";
+        char *sub2 = "ru";
+        char *replace2 = "tas";
+
+        printf("Test output:\n");
+        printf("%s\n%s\n%s\n", strn1, sub1, replace1);
+        printf("McDonuts\n\n");
+        printf("%s\n%s\n%s\n", strn2, sub2, replace2);
+        printf("Utastas tutas\n\n");
+        
+        printf("User output:\n");
+        printf("%s\n%s\n%s\n", strn1, sub1, replace1);
+        printf("%s\n\n", mx_replace_substr(strn1, sub1, replace1));
+        printf("%s\n%s\n%s\n", strn2, sub2, replace2);
+        printf("%s\n", mx_replace_substr(strn2, sub2, replace2));
+    }
+
+    if(!mx_strcmp(argv[1], "mx_del_extra_spaces") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTING MX_DEL_EXTRA_SPACES-----\n\n");
+
+        char *name1 = "\f   My name... \n   is \r Neo   \f\t";
+        printf("Test output:\n");
+        printf("%s\n", name1);
+        printf("My name... is Neo\n");
+
+        printf("User output:\n");
+        printf("%s\n", name1);
+        printf("%s\n\n\n", mx_del_extra_spaces(name1));
+    }
+
+    if(!mx_strcmp(argv[1], "all"))
+        printf("---------------------\n|-----LIST PACK-----|\n---------------------\n");
+
+    if(!mx_strcmp(argv[1], "mx_sort_list") || !mx_strcmp(argv[1], "all")) {
+        printf("\n\n-----TESTNG MX_SORT_LIST-----\n\n");        //MX_SORT_LIST
+        char *n1 = "Allan";
+        char *n2 = "Bob";
+        char *n3 = "Clark";
+        char *n4 = "Frank";
+
+        t_list *aList = mx_create_node(n3);
+        t_list *temp = aList;
+        aList->next = mx_create_node(n2);
+        aList->next->next = mx_create_node(n4);
+        aList->next->next->next = mx_create_node(n1);    
+
+        printf("Test output:\n");
+        while (temp) {
+            printf ("%s\n", temp->data);
+            temp = temp->next;
+        }
+        printf("\nmx_sort_list function used\n\n%s\n%s\n%s\n%s\n\n\n", n1, n2, n3, n4);
+
+        printf("User output:\n");
+        temp = aList;
+        while(temp) {
+            printf("%s\n", temp->data);
+            temp = temp->next;
+        }
+
+        mx_sort_list(aList, cmp_char);
+        printf("\nmx_sort_list function used.\n\n");
+        temp = aList;
+        while (temp) {
+            printf ("%s\n", temp->data);
+            temp = temp->next;   
+        }
+    }
+
+    if(!mx_strcmp(argv[1], "mx_list_size") || !mx_strcmp(argv[1], "all")) {
+        int d1 = 1, d2 = 2, d3 = 3;
+        t_list *aList1 = mx_create_node(&d1);
+        mx_push_back(&aList1, &d2);
+        mx_push_back(&aList1, &d3);
+
+        printf("%d\n", mx_list_size(aList1));
+    }
+
+    if (0) {            //MX_STR_REVERSE
             char s[] = "game over";
             printf("%s\n", s);
             
@@ -446,30 +488,6 @@ int main () {
                 printf("%s\n", aList->next->data);
             else
                 printf("There is no second list.\n");
-    } else if (0) {              //MX_SORT_LIST
-            char *s1 = "Allan";
-            char *s2 = "Bob";
-            char *s3 = "Clark";
-            char *s4 = "fourth";
-
-            t_list *aList = mx_create_node(s3);
-            t_list *temp = aList;
-            aList->next = mx_create_node(s2);
-            aList->next->next = mx_create_node(s4);
-            aList->next->next->next = mx_create_node(s1);
-            
-            while (temp) {
-                printf ("%s\n", temp->data);
-                temp = temp->next;
-            }
-
-            mx_sort_list(aList, cmp_char);
-            printf("mx_sort_list function used.\n");
-            temp = aList;
-            while (temp) {
-                printf ("%s\n", temp->data);
-                temp = temp->next;
-            }
     } else if (0) {                 //MX_MEMSET
             char str[50];
 
