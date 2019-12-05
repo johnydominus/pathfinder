@@ -1,5 +1,5 @@
     UTILS PACK
-mx_printchar        V    
+mx_printchar        V  
 mx_print_unicode    s
 mx_printstr         V
 mx_print_strarr     s+
@@ -32,7 +32,7 @@ mx_count_substr     V
 mx_count_words      s+
 mx_strnew           V
 mx_strtrim          s+
-mx_del_extra_spaces X
+mx_del_extra_spaces X+
 mx_strsplit         V
 mx_strjoin          s+
 mx_file_to_str      b+

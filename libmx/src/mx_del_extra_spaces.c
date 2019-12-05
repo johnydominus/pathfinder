@@ -6,24 +6,21 @@ char *mx_del_extra_spaces(const char *str) {
     char *pre = mx_strtrim(str);
     char *res = mx_strnew(final_length(pre));
     char *iter = res;
-    int spaces = 0;
     
     if(!str)
         return NULL;
 
     while(*pre) {
-        if(mx_isspace(*pre))
-            ++spaces;
-        else
-            spaces = 0;
-
-        if(spaces > 1) {}
-        else 
-            *iter++ = *pre;
-  
+        if(mx_isspace(*pre) && mx_isspace(*(pre + 1))) {}
+        else {
+            if(mx_isspace(*pre)) 
+                *iter++ = ' ';
+            else 
+                *iter++ = *pre;
         ++pre;
+        }
     }
-    
+
     return res;
 }
 

@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <wchar.h>
 #include <limits.h>
-#include <malloc.h>     //CHANGE THIS FOR "#include <malloc/malloc.h>" !!!
+#include <malloc/malloc.h>
 
 typedef struct s_list {
     void *data;

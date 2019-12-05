@@ -8,7 +8,7 @@ char *mx_strncpy(char *dst, const char *src, int len) {
 
         while(i < len && src[i]) {
             dst[i] = src[i];
-            i++;
+            ++i;
         }
 
         while(i < len)

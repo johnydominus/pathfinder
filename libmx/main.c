@@ -156,6 +156,8 @@ int main () {
                                      mx_itoa(-123), 
                                      mx_itoa(INT_MAX + 1));
 
+    printf("-----------------------\n|-----STRING PACK-----|\n-----------------------\n\n\n");
+
     printf("\n\n-----TESTING MX_SWAP_CHAR-----\n\n");       //MX_SWAP_CHAR
     char str1[] = "ONE";
 
@@ -172,6 +174,73 @@ int main () {
     printf("%s\n", str2);
     mx_swap_char(&str2[1], &str2[2]);
     printf("%s\n\n", str2);
+
+
+    printf("\n\n-----TESTING MX_STRTRIM-----\n\n");
+    char *name = "\f  My name... is Neo \t\n";
+    printf("Test output:\n");
+    printf("%s", name);
+    printf("My name... is Neo\n\n");
+
+    printf("User output:\n");
+    printf("%s", name);
+    printf("%s\n\n", mx_strtrim(name));
+
+
+    printf("\n\n-----TESTING MX_READ_LINE------\n\n");
+    int fd = open("fragment", O_RDONLY);
+    char *str = NULL;
+    int res;
+    
+    //NOTE!!! before starting the test create the "fragment" file with corresponding text
+
+    printf("Test output:\n");
+    printf("The hotel was abandoned a\n25\n\n0\ner a fire licked its way accross\n");
+    printf("the polyester carpeting, destroying several rooms as it\n");
+    printf("spooled soot up the walls and ceiling, leaving patterns of\n");
+    printf("permanent shadow\n163\n\n");
+
+    printf("User output:\n");
+
+    res = mx_read_line(&str, 20, 'f', fd);
+    printf("%s\n%d\n", str, res);
+    res = mx_read_line(&str, 35, 't', fd);
+    printf("%s\n%d\n", str, res);
+    res = mx_read_line(&str, 4, '.', fd);
+    printf("%s\n%d\n", str, res);
+    
+    printf("\n\n------TESTING MX_REPLACE_SUBSTR-----\n\n");
+
+    char *strn1 = "McDonalds";
+    char *sub1 = "ald";
+    char *replace1 = "ut";
+    
+    char *strn2 = "Ururu turu";
+    char *sub2 = "ru";
+    char *replace2 = "tas";
+
+    printf("Test output:\n");
+    printf("%s\n%s\n%s\n", strn1, sub1, replace1);
+    printf("McDonuts\n\n");
+    printf("%s\n%s\n%s\n", strn2, sub2, replace2);
+    printf("Utastas tutas\n\n");
+    
+    printf("User output:\n");
+    printf("%s\n%s\n%s\n", strn1, sub1, replace1);
+    printf("%s\n\n", mx_replace_substr(strn1, sub1, replace1));
+    printf("%s\n%s\n%s\n", strn2, sub2, replace2);
+    printf("%s\n", mx_replace_substr(strn2, sub2, replace2));
+
+    printf("\n\n-----TESTING MX_DEL_EXTRA_SPACES-----\n\n");
+
+    char *name1 = "\f   My name... \n   is \r Neo   \f\t";
+    printf("Test output:\n");
+    printf("%s\n", name1);
+    printf("My name... is Neo\n");
+
+    printf("User output:\n");
+    printf("%s\n", name1);
+    printf("%s\n", mx_del_extra_spaces(name1));
 
     printf("\n\n-----TESTNG MX_SORT_LIST-----\n\n");        //MX_SORT_LIST
     char *n1 = "Allan";
@@ -206,16 +275,6 @@ int main () {
         printf ("%s\n", temp->data);
         temp = temp->next;   
     }
-
-    printf("\n\n-----TESTING MX_STRTRIM-----\n\n");
-    char *name = "\f  My name... is Neo \t\n";
-    printf("Test output:\n");
-    printf("%s", name);
-    printf("My name... is Neo\n\n");
-
-    printf("User output:\n");
-    printf("%s", name);
-    printf("%s\n\n", mx_strtrim(name));
 
     if (0) {                    //MX_POW
             printf("%.3f\n", mx_pow(7, 3));
@@ -271,11 +330,6 @@ int main () {
     } else if (0) {
             char *name = "****My name... is Neo****";
             printf("%s\n", mx_strtrim_delim(name, '*'));
-    
-    }else if (0) {       //MX_DEL_EXTRA_SPACES
-            char *name = "\f   My name... \n   is \r Neo   \f\t";
-            printf("%s\n", mx_del_extra_spaces(name));
-    
     } else if (0) {                //MX_STRJOIN
             char *s1 = "dodge ";
             char *s2 = "this";
@@ -416,27 +470,6 @@ int main () {
                 printf ("%s\n", temp->data);
                 temp = temp->next;
             }
-    } else if (0) {         //MX_REPLACE_SUBSTR
-            char *str1 = "McDonalds";
-            char *sub1 = "alds";
-            char *replace1 = "uts";
-            printf ("%s\n%s\n%s\n", str1, sub1, replace1);
-            printf ("%s\n", mx_replace_substr(str1, sub1, replace1));
-            char *str2 = "Ururu turu";
-            char *sub2 = "ru";
-            char *replace2 = "ta";
-            printf ("%s\n%s\n%s\n", str2, sub2, replace2);
-            printf ("%s\n", mx_replace_substr(str2, sub2, replace2));
-    } else if (0) {              //MX_READ_LINE
-            int fd = open("fragment", O_RDONLY);
-            char *str = NULL;
-            int res;
-            res = mx_read_line(&str, 20, 'f', fd);
-            printf("%s\n%d\n", str, res);
-            res = mx_read_line(&str, 35, 't', fd);
-            printf("%s\n%d\n", str, res);
-            res = mx_read_line(&str, 4, 'z', fd);
-            printf("%s\n%d\n", str, res);
     } else if (0) {                 //MX_MEMSET
             char str[50];
 
@@ -478,7 +511,7 @@ int main () {
                 puts ("Memory areas are identical");
             else 
                 printf ("Memory areas differ.\n%d\n", res);
-    } else {
+    } else if (0) {
             printf("There is no such function in test list.\n");
     }
 }
