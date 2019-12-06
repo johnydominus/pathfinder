@@ -7,13 +7,12 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
         return -2;
 
     char *res = get_leaving(buf_size, delim, fd);
-
-    if(!res)
-        return -2;
-
     static char *leavings[4096];
     char *temp = mx_strjoin(leavings[fd], res);
     int del_ind = mx_get_char_index(temp, delim);
+
+    if(!res)
+        return -2;
 
     temp[del_ind] = '\0';
     leavings[fd] = mx_strdup(temp + del_ind + 1);

@@ -5,9 +5,9 @@ char *mx_strndup(const char *s1, size_t n) {
 
     if(n < len)
         len = n;
-    
+
     char *new_str = mx_strnew(len * sizeof(char));
-    
+
     if(!new_str)
         return NULL;
 

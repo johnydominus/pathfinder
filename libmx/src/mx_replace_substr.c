@@ -14,11 +14,11 @@ char *mx_replace_substr(const char *str, const char *sub, const char *replace) {
             mx_strncpy(&res[j], replace, mx_strlen(replace));
             i += mx_strlen(sub);
             j += mx_strlen(replace);
-        } 
+        }
         else
             res[j++] = str[i++];
     }
-    
+
     res[j] = '\0';
     return res;
 }

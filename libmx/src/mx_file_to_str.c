@@ -9,7 +9,7 @@ char *mx_file_to_str(const char* filename) {
 
     if(fd_dst < 0) 
         return NULL;
-    
+
     while((cnt = read(fd_dst, buf, sizeof(buf))) > 0) {
         buf[cnt] = '\0';
         temp = result;
@@ -18,6 +18,6 @@ char *mx_file_to_str(const char* filename) {
     }
 
     close(fd_dst);
-    
+
     return result;
 }

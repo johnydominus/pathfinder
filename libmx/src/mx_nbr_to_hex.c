@@ -12,7 +12,7 @@ char *mx_nbr_to_hex(unsigned long nbr) {
             hexadecimal[cntr++] = 48 + (nbr%16);
         else 
             hexadecimal[cntr++] = 87 + (nbr%16);
-        
+
         nbr /= 16;
     }
 

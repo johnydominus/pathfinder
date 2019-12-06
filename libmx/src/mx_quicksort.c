@@ -8,10 +8,10 @@ int mx_quicksort(char **arr, int left, int right) {
         return -1;
 
     int swap_cnt = 0;
-    
+
     if (left < right) {
         int pi = partition(arr, left, right, &swap_cnt);
-    
+
         mx_quicksort(arr, left, pi - 1);
         mx_quicksort(arr, pi + 1, right);
     }

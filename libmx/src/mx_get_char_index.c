@@ -2,7 +2,7 @@
 
 int mx_get_char_index(const char *str, char c) {
     int cnt = 0;
-    
+
     if(str == NULL)
         return -2;
 

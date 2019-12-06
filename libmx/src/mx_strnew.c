@@ -9,7 +9,7 @@ char *mx_strnew(const int size) {
         for(int i = 0; i < size + 1; i++)
             result[i] = '\0';
     }
-    
+
     if(!result)
         return NULL;
     else

@@ -32,6 +32,18 @@ static void swap(char *s1, char *s2)
   }
 }
 
+void test_header(char *testname) {
+    printf("\n\n-----TESTING %s-----\n\n", testname);
+}
+
+void tu_output(char *tu) {
+    if(!mx_strcmp(tu, "test"))
+        printf("Test output:\n");
+    else if(!mx_strcmp(tu, "user"))
+        printf("User output:\n");
+
+}
+
 int main (int argc, char *argv[]) {
     if(argc < 2) {printf("usage:\n./test 'name of a function' //to test certain function\n./test all //to test all available functions\n");
         return 0;
@@ -43,7 +55,7 @@ int main (int argc, char *argv[]) {
     }
 
     if(!mx_strcmp(argv[1], "mx_printchar") || !mx_strcmp(argv[1], "all")) {
-        printf("\n\n-----TESTING MX_PRINTCHAR-----\n\n");               //MX_PRINTCHAR
+        test_header("MX_PRINTCHAR");                                //MX_PRINTCHAR
 
         char printmechar = 'l';
 
@@ -58,7 +70,7 @@ int main (int argc, char *argv[]) {
     }
     
     if(!mx_strcmp(argv[1], "mx_print_unicode") || !mx_strcmp(argv[1], "all")) {
-        printf("\n\n-----TESTING MX_PRINT_UNICODE-----\n\n");       //MX_PRINT_UNICODE
+        test_header("MX_PRINT_UNICODE");                            //MX_PRINT_UNICODE
             
         wchar_t c = 0x2605;
 
@@ -178,6 +190,25 @@ int main (int argc, char *argv[]) {
                                         mx_itoa(INT_MAX + 1));
     }
 
+    if(!mx_strcmp(argv[1], "mx_quicksort") || !mx_strcmp(argv[1], "all")) {             
+        test_header("MX_QUICKSORT");
+        char *arr[] = {"Michelangelo", "Donatello", "Leonardo", "Raphael"};
+        char *arr1[] = {"DMC", "Clint Eastwood", "Dr Brown", "Einstein", "Jessica", "Beef Tannen"};
+        char d = '\n';
+
+        tu_output("test");
+        printf("2\n");
+        printf("%s\n%s\n%s\n%s\n\n", arr[0], arr[1], arr[3], arr[2]);
+        printf("2\n");
+        printf("%s\n%s\n%s\n%s\n%s\n\n", arr1[0], arr1[4], arr1[2], arr1[3], arr1[1]);
+
+        tu_output("user");
+        printf("%d\n", mx_quicksort(arr, 0, 3));
+        mx_print_strarr(arr, &d);
+        printf("\n%d\n", mx_quicksort(arr1, 0, 5));
+        mx_print_strarr(arr1, &d);
+    }
+
     if(!mx_strcmp(argv[1], "all"))
         printf("\n\n-----------------------\n|-----STRING PACK-----|\n-----------------------\n");
 
@@ -200,7 +231,20 @@ int main (int argc, char *argv[]) {
         printf("%s\n\n", str2);
     }
 
-    if(!mx_strcmp(argv[1], "mx_strtrim") || !mx_strcmp(argv[1], "all")) {
+    if(!mx_strcmp(argv[1], "mx_str_reverse") || !mx_strcmp(argv[1], "all")) {              //MX_STR_REVERSE
+    
+        test_header("MX_STR_REVERSE");
+        char s[] = "game over";
+        tu_output("test");
+        printf("%s\nrevo emag\n\n", s);
+          
+        tu_output("user");
+        printf("%s\n", s);
+        mx_str_reverse(s);
+        printf("%s\n", s);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strtrim") || !mx_strcmp(argv[1], "all")) {                   //MX_STRTRIM
         printf("\n\n-----TESTING MX_STRTRIM-----\n\n");
         char *name = "\f  My name... is Neo \t\n";
         printf("Test output:\n");
@@ -212,7 +256,73 @@ int main (int argc, char *argv[]) {
         printf("%s\n\n", mx_strtrim(name));
     }
 
-    if(!mx_strcmp(argv[1], "mx_read_line") || !mx_strcmp(argv[1], "all")) {
+    if(!mx_strcmp(argv[1], "mx_strcpy") || !mx_strcmp(argv[1], "all")) {                    //MX_STRCPY
+        test_header("MX_STRCPY");
+        char str[] = "Hello!";
+        tu_output("test");
+        printf("%s\n%s\n\n", str, str);
+
+        tu_output("user");
+        printf("%s\n", str);
+        char *str1 = mx_strnew(6);
+        mx_strcpy(str1, str);
+        printf("%s\n", str1);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strncpy") || !mx_strcmp(argv[1], "all")) {                   //MX_STRNCPY
+        test_header("MX_STRNCPY");
+        char src[] = "Hello, World!";
+        char *dst = mx_strnew(4);
+        
+        tu_output("test");
+        printf("%s\nHell\n\n", src);
+
+        tu_output("user");
+        printf("%s\n", src);
+        mx_strncpy(dst, src, 4);
+        printf("%s\n", dst);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strndup") || !mx_strcmp(argv[1], "all")) {                   //MX_STRNDUP
+        test_header("MX_STRNDUP");
+        char src1[] = "Abatur processing flash";
+        
+        tu_output("test");
+        printf("%s\nAbat\n\n", src1);
+        
+        tu_output("user");
+        printf("%s\n%s\n", src1, mx_strndup(src1, 4));
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strstr") || !mx_strcmp(argv[1], "all")) {                    //MX_STRSTR
+        test_header("MX_STRSTR");
+        const char largestring[] = "Foo Bar Baz";
+        const char smallstring[] = "Bar";
+        
+        tu_output("test");
+        printf("%s\n%s\nBar Baz\n\n", largestring, smallstring);
+
+        tu_output("user");
+        printf("%s\n%s\n", largestring, smallstring);
+        char *ptr = mx_strstr(largestring, smallstring);
+        printf("%s\n", ptr);
+    }
+
+    if(!mx_strcmp(argv[1], "mx_strjoin") || !mx_strcmp(argv[1], "all")) {                   //MX_STRJOIN
+        test_header("MX_STRJOIN");
+        char *s1 = "dodge ";
+        char *s2 = "this";
+        char *s3 = NULL;
+        tu_output("test");
+        printf("%s%s\n%s\n%s\n\n", s1, s2, s1, NULL);
+
+        tu_output("user");
+        printf("%s\n", mx_strjoin(s1, s2));
+        printf("%s\n", mx_strjoin(s1, s3));
+        printf("%s\n", mx_strjoin(s3, s3));
+    }
+
+    if(!mx_strcmp(argv[1], "mx_read_line") || !mx_strcmp(argv[1], "all")) {                 //MX_READ_LINE
         printf("\n\n-----TESTING MX_READ_LINE------\n\n");
         int fd = open("fragment", O_RDONLY);
         char *str = NULL;
@@ -236,7 +346,7 @@ int main (int argc, char *argv[]) {
         printf("%s\n%d\n", str, res);
     }
 
-    if(!mx_strcmp(argv[1], "mx_replace_substr") || !mx_strcmp(argv[1], "all")) {
+    if(!mx_strcmp(argv[1], "mx_replace_substr") || !mx_strcmp(argv[1], "all")) {            //MX_REPLACE_SUBSTR
         printf("\n\n------TESTING MX_REPLACE_SUBSTR-----\n\n");
 
         char *strn1 = "McDonalds";
@@ -260,7 +370,7 @@ int main (int argc, char *argv[]) {
         printf("%s\n", mx_replace_substr(strn2, sub2, replace2));
     }
 
-    if(!mx_strcmp(argv[1], "mx_del_extra_spaces") || !mx_strcmp(argv[1], "all")) {
+    if(!mx_strcmp(argv[1], "mx_del_extra_spaces") || !mx_strcmp(argv[1], "all")) {              //MX_DEL_EXTRA_SPACES
         printf("\n\n-----TESTING MX_DEL_EXTRA_SPACES-----\n\n");
 
         char *name1 = "\f   My name... \n   is \r Neo   \f\t";
@@ -274,10 +384,61 @@ int main (int argc, char *argv[]) {
     }
 
     if(!mx_strcmp(argv[1], "all"))
+        printf("--------------------\n|-----MEM PACK-----|\n--------------------\n");
+
+    if (!mx_strcmp(argv[1], "mx_memset") || !mx_strcmp(argv[1], "all")) {                 //MX_MEMSET
+            test_header("MX_MEMSET");
+            char str[50];
+
+            tu_output("test");
+            mx_strcpy(str, "This is libmx.h library function");
+            puts(str);
+            printf("$$$$$$$ libmx.h library function\n");
+
+            tu_output("user");
+            puts(str);
+            mx_memset(str, '$', 7);
+            puts(str);
+    if (!mx_strcmp(argv[1], "mx_memcpy") || mx_strcmp(argv[1], "all")) {                 //MX_MEMCPY
+            char dst[] = "This is destination string.";
+            char src[] = "NO MORE ";
+
+            puts(dst);
+
+            mx_memcpy(dst, src, 8);
+            puts(dst);
+    if (!mx_strcmp(argv[1], "mx_memcpy") || !mx_strcmp(argv[1], "all")) {                //MX_MEMCCPY
+            char string1[60] = "Taj Mahal is a historic monument in India.";
+            char buffer[61];
+            char *pdest;
+            printf("Function: _memccpy 42 characters or to character 'c'\n");
+            printf("Source: %s\n", string1);
+            pdest = mx_memccpy(buffer, string1, 'c', 42);
+            *pdest = '\0';
+            printf("Result: %s\n", buffer);
+            printf("Length: %lu characters\n", strlen(buffer));
+            printf("----------------\n");
+            char *msg = "This is the string: not copied";
+            char buffer1[80];
+            mx_memset(buffer1, '\0', 80);
+            mx_memccpy(buffer1, msg, ':', 80);
+            printf("%s\n", buffer1);
+    if (!mx_strcmp(argv[1], "mx_memcmp") || !mx_strcmp(argv[1], "all")) {             //MX_MEMCMP
+            unsigned char src[15] = "1234567890";
+            unsigned char dst[15] = "1234567890";
+            int res;
+
+            if ((res = mx_memcmp(src, dst, 10)) == 0)
+                puts ("Memory areas are identical");
+            else 
+                printf ("Memory areas differ.\n%d\n", res);
+    } 
+
+    if(!mx_strcmp(argv[1], "all"))
         printf("---------------------\n|-----LIST PACK-----|\n---------------------\n");
 
     if(!mx_strcmp(argv[1], "mx_sort_list") || !mx_strcmp(argv[1], "all")) {
-        printf("\n\n-----TESTNG MX_SORT_LIST-----\n\n");        //MX_SORT_LIST
+        printf("\n\n-----TESTNG MX_SORT_LIST-----\n\n");                                        //MX_SORT_LIST
         char *n1 = "Allan";
         char *n2 = "Bob";
         char *n3 = "Clark";
@@ -312,89 +473,33 @@ int main (int argc, char *argv[]) {
         }
     }
 
-    if(!mx_strcmp(argv[1], "mx_list_size") || !mx_strcmp(argv[1], "all")) {
+    if(!mx_strcmp(argv[1], "mx_list_size") || !mx_strcmp(argv[1], "all")) {                     //MX_LIST_SIZE
+        
         int d1 = 1, d2 = 2, d3 = 3;
         t_list *aList1 = mx_create_node(&d1);
         mx_push_back(&aList1, &d2);
         mx_push_back(&aList1, &d3);
 
+        tu_output("test");
+        printf("3\n\n");
+
+        tu_output("user");
+
         printf("%d\n", mx_list_size(aList1));
     }
 
-    if (0) {            //MX_STR_REVERSE
-            char s[] = "game over";
-            printf("%s\n", s);
+   
+    if (0) {} 
+    else if(0) {                    //MX_STRDEL
+        char *str = mx_strnew(6);
+        str = "Hello!";
             
-            mx_str_reverse(s);
-            printf("%s\n", s);
-        
-    } else if (0) {                   //MX_ITOA
-            printf("%s\n", mx_itoa(0));
-            printf("%s\n", mx_itoa(INT_MIN));
-            printf("%s\n", mx_itoa(INT_MAX));
-            printf("%s\n", mx_itoa(-123));
-            printf("%s\n", mx_itoa(100));
-
-    } else if (0) {                 //MX_STRDEL
-            char *str = mx_strnew(6);
-            str = "Hello!";
-            printf("%s\n", str);
-            mx_strdel(&str);
-            printf("%s\n", str);
-
-    } else if (0) {                 //MX_STRCPY
-            char str[] = "Hello!";
-            char *str1 = mx_strnew(6);
-            mx_strcpy(str1, str);
-            printf("%s\n", str1);
-
-    } else if (0) {                //MX_STRNCPY
-            char src[] = "Hello, World!";
-            char *dst = mx_strnew(4);
-            
-            mx_strncpy(dst, src, 4);
-            printf("%s\n", dst);
-
-    } else if (0) {                //MX_STRNDUP
-            char src[] = "Hello, World!";
-            printf("%s\n", mx_strndup(src, 4));
-
-    } else if (0) {                 //MX_STRSTR
-            const char largestring[] = "Foo Bar Baz";
-            const char smallstring[] = "Bar";
-            char *ptr = mx_strstr(largestring, smallstring);
-            printf("%s\n", ptr);
-
-    } else if (0) {                //MX_STRTRIM
-            char *name = "\f  My name... is Neo \t\n";
-            printf("%s\n", mx_strtrim(name));
-
+        printf("%s\n", str);
+        mx_strdel(&str);
+        printf("%s\n", str);
     } else if (0) {
-            char *name = "****My name... is Neo****";
-            printf("%s\n", mx_strtrim_delim(name, '*'));
-    } else if (0) {                //MX_STRJOIN
-            char *s1 = "dodge ";
-            char *s2 = "this";
-            char *s3 = NULL;
-            printf("%s\n", mx_strjoin(s1, s2));
-            printf("%s\n", mx_strjoin(s1, s3));
-            printf("%s\n", mx_strjoin(s3, s3));
-    } else if (0) {              //MX_QUICKSORT
-            char *arr[] = {"Michelangelo", "Donatello", "Leonardo", "Raphael"};
-            printf("%d\n", mx_quicksort(arr, 0, 3));
-            char d = '\n';
-            mx_print_strarr(arr, &d);
-    } else if (0){                  //MX_STRSTR
-            const char *largestring = "Foo Bar Baz";
-            const char *smallstring = "Bar";
-            const char *bam = "Baraban";
-            char *ptr = NULL;
-
-            ptr = mx_strstr(largestring, bam);
-            printf("%s\n", ptr);
-            ptr = mx_strstr(largestring, smallstring);
-            printf("%s\n", ptr);
-            printf("%s\n", mx_strstr(largestring, NULL));
+        char *name = "****My name... is Neo****";
+        printf("%s\n", mx_strtrim_delim(name, '*'));
     } else if (0) {        //MX_GET_SUBSTR_INDEX
             printf("%d\n", mx_get_substr_index("McDonalds", "Don"));
             printf("%d\n", mx_get_substr_index("McDonalds Donuts", "on"));
@@ -488,47 +593,6 @@ int main (int argc, char *argv[]) {
                 printf("%s\n", aList->next->data);
             else
                 printf("There is no second list.\n");
-    } else if (0) {                 //MX_MEMSET
-            char str[50];
-
-            mx_strcpy(str, "This is libmx.h library function");
-            puts(str);
-
-            mx_memset(str, '$', 7);
-            puts(str);
-    } else if (0) {                 //MX_MEMCPY
-            char dst[] = "This is destination string.";
-            char src[] = "NO MORE ";
-
-            puts(dst);
-
-            mx_memcpy(dst, src, 8);
-            puts(dst);
-    } else if (0) {                //MX_MEMCCPY
-            char string1[60] = "Taj Mahal is a historic monument in India.";
-            char buffer[61];
-            char *pdest;
-            printf("Function: _memccpy 42 characters or to character 'c'\n");
-            printf("Source: %s\n", string1);
-            pdest = mx_memccpy(buffer, string1, 'c', 42);
-            *pdest = '\0';
-            printf("Result: %s\n", buffer);
-            printf("Length: %lu characters\n", strlen(buffer));
-            printf("----------------\n");
-            char *msg = "This is the string: not copied";
-            char buffer1[80];
-            mx_memset(buffer1, '\0', 80);
-            mx_memccpy(buffer1, msg, ':', 80);
-            printf("%s\n", buffer1);
-    } else if (0) {
-            unsigned char src[15] = "1234567890";
-            unsigned char dst[15] = "1234567890";
-            int res;
-
-            if ((res = mx_memcmp(src, dst, 10)) == 0)
-                puts ("Memory areas are identical");
-            else 
-                printf ("Memory areas differ.\n%d\n", res);
     } else if (0) {
             printf("There is no such function in test list.\n");
     }

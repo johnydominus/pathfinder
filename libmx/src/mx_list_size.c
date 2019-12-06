@@ -6,7 +6,7 @@ int mx_list_size(t_list *list) {
 
     if(list == NULL)
         return cntr;
-    
+
     while(temp->next) {
         ++cntr;
         temp = temp->next;
