@@ -4,6 +4,7 @@
 #include <string.h>
 #include <locale.h>
 #include <math.h>
+#include <limits.h>
 
 void my_print_unicode(wchar_t c);
 void my_print_strarr(char **arr, const char *delim);
@@ -192,8 +193,8 @@ int main (int argc, char *argv[]) {
 
     if(!mx_strcmp(argv[1], "mx_quicksort") || !mx_strcmp(argv[1], "all")) {             
         test_header("MX_QUICKSORT");
-        char *arr[] = {"Michelangelo", "Donatello", "Leonardo", "Raphael"};
-        char *arr1[] = {"DMC", "Clint Eastwood", "Dr Brown", "Einstein", "Jessica", "Beef Tannen"};
+        char *arr[] = {"Michelangelo", "Donatello", "Leonardo", "Raphael", NULL};
+        char *arr1[] = {"DMC", "Clint Eastwood", "Dr Brown", "Einstein", "Jessica", "Beef Tannen", NULL};
         char d = '\n';
 
         tu_output("test");
@@ -399,7 +400,8 @@ int main (int argc, char *argv[]) {
             puts(str);
             mx_memset(str, '$', 7);
             puts(str);
-    if (!mx_strcmp(argv[1], "mx_memcpy") || mx_strcmp(argv[1], "all")) {                 //MX_MEMCPY
+    }
+    if (!mx_strcmp(argv[1], "mx_memcpy") || !mx_strcmp(argv[1], "all")) {                 //MX_MEMCPY
             char dst[] = "This is destination string.";
             char src[] = "NO MORE ";
 
@@ -407,6 +409,7 @@ int main (int argc, char *argv[]) {
 
             mx_memcpy(dst, src, 8);
             puts(dst);
+    }
     if (!mx_strcmp(argv[1], "mx_memcpy") || !mx_strcmp(argv[1], "all")) {                //MX_MEMCCPY
             char string1[60] = "Taj Mahal is a historic monument in India.";
             char buffer[61];
@@ -423,6 +426,7 @@ int main (int argc, char *argv[]) {
             mx_memset(buffer1, '\0', 80);
             mx_memccpy(buffer1, msg, ':', 80);
             printf("%s\n", buffer1);
+    }
     if (!mx_strcmp(argv[1], "mx_memcmp") || !mx_strcmp(argv[1], "all")) {             //MX_MEMCMP
             unsigned char src[15] = "1234567890";
             unsigned char dst[15] = "1234567890";
@@ -597,6 +601,7 @@ int main (int argc, char *argv[]) {
             printf("There is no such function in test list.\n");
     }
 }
+
 
 void my_print_unicode(wchar_t c) {
     char str[5];
