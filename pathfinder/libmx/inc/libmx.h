@@ -21,6 +21,7 @@ void mx_pop_back(t_list **head);
 void mx_pop_front(t_list **head);
 void mx_push_front(t_list **list, void *data);
 void mx_push_back(t_list **list, void *data);
+void mx_printerr(const char *s);
 t_list *mx_create_node(void *data);
 void *mx_memmove(void *dst, const void *src, size_t len);
 int mx_memcmp(const void *s1, const void *s2, size_t n);
@@ -50,6 +51,7 @@ void mx_swap_char(char *s1, char *s2);
 int mx_strlen(const char *s);
 int mx_quicksort(char **arr, int left, int right);
 int mx_bubble_sort(char **arr, int size);
+int mx_atoi(const char *str);
 void mx_foreach(const int *arr, int size, void (*f)(int));
 char *mx_itoa(int number);
 unsigned long mx_hex_to_nbr(const char *hex);
@@ -74,5 +76,6 @@ int mx_strlen_delim (const char *s, char delim);
 int mx_strncmp (const char *s1, const char *s2, size_t n);
 char **mx_strsplit(const char *s, char c);
 char *mx_strtrim_delim (const char *str, const char delim);
+bool mx_isdigit(int c);
 
 #endif
