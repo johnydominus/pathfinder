@@ -1,0 +1,17 @@
+using ((depth-first search || breadth-first search) &&  adjacency list);
+
+main(){
+    test error cases;
+        usage           V
+        no file         
+        empty file      
+        first line      V
+        some line       V
+        
+    parse vertices amount;
+    parse graph &&
+    create adjacency list;
+    use pathfinding algorithm;
+    save right path;
+    output the path;
+};

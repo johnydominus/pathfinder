@@ -13,11 +13,16 @@ typedef struct s_vertice {
     t_edge *edges;
 } t_vertice;
 
-#define ERR_INVALID_ARG_NUM "usage: ./pathfinder [filename]"
-#define ERR_NO_FILE(a_file) mx_strcat("error: file ", mx_strcat(#a_file, " does not exist"))
-#define ERR_EMPTY_FILE(a_file) mx_strcat("error: file ", mx_strcat(#a_file, " is empty"))
-#define ERR_INVALID_FIRST_LINE "error: line 1 is not valid"
+typedef enum e_error {
+    INVALID_ARG_NUM,
+    NO_FILE,
+    EMPTY_FILE,
+    INVALID_FIRST_LINE,
+    INVALID_LINE,
+    INVALID_ISLANDS_NUM
+} t_error;
 
 int mx_check_first_line(char *str, int *itert);
 t_vertice *mx_create_vertice(const char *name);
 t_edge *mx_create_edge(void);
+void mx_error(t_error error_type, char *filename);
