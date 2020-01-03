@@ -1,12 +1,12 @@
 using ((depth-first search || breadth-first search) &&  adjacency list);
 
 main(){
-    test error cases;
+    error handling      
         usage           V
-        no file         
+        no file         V
         empty file      
         first line      V
-        some line       V
+        some line       
         
     parse vertices amount;
     parse graph &&
@@ -15,3 +15,16 @@ main(){
     save right path;
     output the path;
 };
+
+adjacency_list {
+    nodes {
+        vertice {
+            name;
+            edges {
+                vertice_name;
+                distance;
+            }
+        }
+        next node;
+    }
+}

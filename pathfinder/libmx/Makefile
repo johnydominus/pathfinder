@@ -5,6 +5,7 @@ HEADTMP = ./libmx.h
 
 SRC = ./mx_atoi.c \
 	  ./mx_isdigit.c \
+	  ./mx_isalpha.c \
 	  ./mx_printerr.c \
 	  ./mx_sort_list.c \
 	  ./mx_list_size.c \
@@ -68,8 +69,9 @@ SRC = ./mx_atoi.c \
 
 SRCS = ./src/mx_atoi.c \
 	   ./src/mx_isdigit.c \
+	   ./src/mx_isalpha.c \
 	   ./src/mx_printerr.c \
-       ./src/mx_sort_list.c \
+           ./src/mx_sort_list.c \
 	   ./src/mx_list_size.c \
 	   ./src/mx_pop_back.c \
 	   ./src/mx_pop_front.c \
@@ -131,6 +133,7 @@ SRCS = ./src/mx_atoi.c \
 
 OBJ = ./mx_atoi.o \
 	  ./mx_isdigit.o \
+	  ./mx_isalpha.o \
 	  ./mx_printerr.o \
  	  ./mx_sort_list.o \
 	  ./mx_list_size.o \
@@ -194,6 +197,7 @@ OBJ = ./mx_atoi.o \
 
 OBJO = ./obj/mx_sort_list.o \
 	   ./obj/mx_atoi.o \
+	   ./obj/mx_isalpha.o \
 	   ./obj/mx_isdigit.o \
 	   ./obj/mx_printerr.o \
 	  ./obj/mx_list_size.o \

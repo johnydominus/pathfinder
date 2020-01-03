@@ -77,5 +77,6 @@ int mx_strncmp (const char *s1, const char *s2, size_t n);
 char **mx_strsplit(const char *s, char c);
 char *mx_strtrim_delim (const char *str, const char delim);
 bool mx_isdigit(int c);
+bool mx_isalpha(int c);
 
 #endif
