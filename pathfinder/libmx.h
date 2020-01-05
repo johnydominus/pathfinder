@@ -1,6 +1,14 @@
 #ifndef LIBMH_H
 #define LIBMH_H
 
+#ifdef __APPLE__
+    #include <malloc/malloc.h>
+    #define MALLOC_SIZE(x)  malloc_size(x)
+#elif __linux
+    #include <malloc.h>
+    #define MALLOC_SIZE(x)  malloc_usable_size(x)
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -8,7 +16,7 @@
 #include <fcntl.h>
 #include <wchar.h>
 #include <limits.h>
-#include <malloc/malloc.h>
+
 
 typedef struct s_list {
     void *data;
@@ -44,6 +52,7 @@ char *mx_strncpy(char *dst, const char *src, int len);
 char *mx_strcpy(char *dst, const char *src);
 char *mx_strndup(const char *s1, size_t n);
 char *mx_strdup(const char *str);
+char *mx_strdup_delim(const char *s1, char n);
 int mx_get_char_index(const char *str, char c);
 void mx_strdel(char **str);
 void mx_str_reverse(char *s);

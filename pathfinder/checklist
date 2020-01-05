@@ -2,13 +2,14 @@ using ((depth-first search || breadth-first search) &&  adjacency list);
 
 main(){
     error handling      
-        usage           V
-        no file         V
-        empty file      
-        first line      V
-        some line       
+        usage                   V
+        no file                 V
+        empty file              V
+        first line              V
+        some line               V
+        islands num             
         
-    parse vertices amount;
+    parse vertices amount;      V
     parse graph &&
     create adjacency list;
     use pathfinding algorithm;

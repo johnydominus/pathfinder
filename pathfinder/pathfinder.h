@@ -25,5 +25,5 @@ typedef enum e_error {
 int mx_check_first_line(char *str, int *iter);
 int mx_check_lines(char *str, int *iter);
 t_vertice *mx_create_vertice(const char *name);
-t_edge *mx_create_edge(void);
+t_edge *mx_create_edge(const char *vert_name, const int distance);
 void mx_error(t_error error_type, char *filename);

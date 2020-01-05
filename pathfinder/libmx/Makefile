@@ -4,6 +4,7 @@ INC = ./inc/libmx.h
 HEADTMP = ./libmx.h
 
 SRC = ./mx_atoi.c \
+	  ./mx_strdup_delim.c \
 	  ./mx_isdigit.c \
 	  ./mx_isalpha.c \
 	  ./mx_printerr.c \
@@ -68,10 +69,11 @@ SRC = ./mx_atoi.c \
 	  ./mx_strtrim_delim.c
 
 SRCS = ./src/mx_atoi.c \
+	   ./src/mx_strdup_delim.c \
 	   ./src/mx_isdigit.c \
 	   ./src/mx_isalpha.c \
 	   ./src/mx_printerr.c \
-           ./src/mx_sort_list.c \
+       ./src/mx_sort_list.c \
 	   ./src/mx_list_size.c \
 	   ./src/mx_pop_back.c \
 	   ./src/mx_pop_front.c \
@@ -132,6 +134,7 @@ SRCS = ./src/mx_atoi.c \
 	   ./src/mx_strtrim_delim.c
 
 OBJ = ./mx_atoi.o \
+	  ./mx_strdup_delim.o \
 	  ./mx_isdigit.o \
 	  ./mx_isalpha.o \
 	  ./mx_printerr.o \
@@ -196,6 +199,7 @@ OBJ = ./mx_atoi.o \
 	  ./mx_strtrim_delim.o
 
 OBJO = ./obj/mx_sort_list.o \
+	   ./obj/mx_strdup_delim.o \
 	   ./obj/mx_atoi.o \
 	   ./obj/mx_isalpha.o \
 	   ./obj/mx_isdigit.o \
@@ -278,3 +282,4 @@ uninstall:
 	@rm -rf $(NAME)
 
 install: uninstall clean all
+

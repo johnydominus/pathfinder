@@ -5,15 +5,15 @@ void *mx_realloc(void *ptr, size_t size) {
 
     if (!ptr)
         return malloc(size);
-    else if (malloc_size(ptr) >= size) 
+    else if (MALLOC_SIZE(ptr) >= size) 
         return ptr;
     else if (size == 0) {
         free(ptr);
-        return malloc(malloc_size(NULL));
+        return malloc(MALLOC_SIZE(NULL));
     }
     else {
         newPtr = malloc(size);
-        mx_memcpy(newPtr, ptr, malloc_size(ptr));
+        mx_memcpy(newPtr, ptr, MALLOC_SIZE(ptr));
         free(ptr);
     }
 
