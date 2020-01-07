@@ -45,9 +45,10 @@ install:
 
 clean:
 	@cd libmx && make -f Makefile clean
-	@rm -rf $(OBJO) $(SRC) $(HEADTMP)
+	@rm -rf $(OBJ) $(OBJO) $(SRC) $(HEADTMP)
 	@rm -rf ./obj
-	@rm -rf ./libmx/obj
+	@rm -rf libmx.a
+	@rm -rf ./libmx/objd
 
 uninstall:
 	@cd libmx && make -f Makefile uninstall
