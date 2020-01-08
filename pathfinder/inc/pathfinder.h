@@ -10,7 +10,7 @@ typedef struct s_edge
 
 typedef struct s_vertice {
     char *name;
-    t_edge *edges;
+    t_edge **edges;
 } t_vertice;
 
 typedef enum e_error {
@@ -19,11 +19,12 @@ typedef enum e_error {
     EMPTY_FILE,
     INVALID_FIRST_LINE,
     INVALID_LINE,
-    INVALID_ISLANDS_NUM
+    INVALID_ISLANDS_NUM,
+    WRONG_POINTER
 } t_error;
 
 int mx_check_first_line(char *str, int *iter);
 int mx_check_lines(char *str, int *iter);
-t_vertice *mx_create_vertice(const char *name);
+t_vertice *mx_create_vertice(const char *name, int vertices);
 t_edge *mx_create_edge(const char *vert_name, const int distance);
 void mx_error(t_error error_type, char *filename);

@@ -26,6 +26,9 @@ void mx_error(t_error error_type, char *filename) {
             mx_printerr(filename);
             mx_printerr(" is not valid\n");
             break;
+        case WRONG_POINTER:
+            mx_printerr("wrong pointer passed to a function\n");
+            break;
         default:
             break;
     }

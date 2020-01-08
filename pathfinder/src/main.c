@@ -1,16 +1,15 @@
 #include "pathfinder.h"
 
-int check_vertice_presence(t_vertice *ad_list, char *content, int vertices);
-bool check_edge_presence(t_vertice *vertice, char *content);
+int check_vertice_presence(t_vertice **ad_list, char *content, int vertices);
+bool check_edge_presence(t_edge **edges, char *content);
 bool compare_names(t_vertice *vertice, char *name);
-bool parse_island(t_vertice *adj_list, char *isl1, char *isl2, int dist);
 
 int main(int argc, char **argv) {
     int vertices;
     int iter;
     int len;
     char *file_data = NULL;
-    t_vertice *adjacency_list = NULL;
+    t_vertice **adjacency_list = NULL;
 
     if(argc != 2) {
         mx_error(INVALID_ARG_NUM, NULL);
@@ -60,7 +59,6 @@ int main(int argc, char **argv) {
     char *island1 = NULL;
     char *island2 = NULL;
     int temp_distance = 0;
-    t_vertice *temp_vertice = adjacency_list;
 
     while(file_data[iter]) {
         if(parsed_islands > vertices) {
@@ -79,63 +77,74 @@ int main(int argc, char **argv) {
         while(file_data[iter] && !mx_isalpha(file_data[iter]))
             ++iter;
         
-        if(parse_island(adjacency_list, island1, island2, temp_distance))
+        int x = check_vertice_presence(adjacency_list, island1, parsed_islands);    //parsing islands
+        if(x == -2)
+            mx_error(WRONG_POINTER, NULL);
+        else if(x == -1) {
+            adjacency_list[parsed_islands] = mx_create_vertice(island1, vertices);
+            printf("%s parsed!\n", adjacency_list[parsed_islands]->name);
             ++parsed_islands;
-        if(parse_island(adjacency_list, island2, island1, temp_distance))
-            ++parsed_islands;
-
-        temp_vertice = &adjacency_list[parsed_islands];         //parsing islands
-
-    }
-}
-
-bool parse_island(t_vertice *adj_list, char *isl1, char *isl2, int dist) {
-    int x = check_vertice_presence(adjacency_list, island1, parsed_islands);
-    bool new_island = false;
-    if(x == -2)
-        return -1;
-    else if(x == -1) {
-        temp_vertice = mx_create_vertice(island1);
-        new_island = true;
-    }
-    else {
-        if(check_edge_presence(temp_vertice, island2)) {}
+        }
         else {
-            int it = 0;
-            t_edge *temp_edge = &temp_vertice->edges[it];
-            while(temp_edge) {
-                ++it;
-                temp_edge = &temp_vertice->edges[it];
+            if(check_edge_presence(adjacency_list[parsed_islands]->edges, island2)) {}
+            else {
+                int it = 0;
+                t_edge *temp_edge = adjacency_list[parsed_islands]->edges[it];
+                while(temp_edge)
+                    temp_edge = adjacency_list[parsed_islands]->edges[++it];
+                temp_edge = mx_create_edge(island2, temp_distance);
             }
-            temp_edge = mx_create_edge(island2, temp_distance);
-        }            
-    }    
-    return new_island;
+        }
+
+        x = check_vertice_presence(adjacency_list, island2, parsed_islands);
+        if(x == -2)
+            mx_error(WRONG_POINTER, NULL);
+        else if(x == -1) {
+            adjacency_list[parsed_islands] = mx_create_vertice(island2, vertices);
+            printf("%s parsed!\n", adjacency_list[parsed_islands]->name);
+            ++parsed_islands;
+        }
+        else {
+            printf("!!\n");
+            if(check_edge_presence(adjacency_list[parsed_islands]->edges, island1)) {}
+            else {
+                int it = 0;
+                t_edge *temp_edge = adjacency_list[parsed_islands]->edges[it];
+                while (temp_edge)
+                    temp_edge = adjacency_list[parsed_islands]->edges[++it];
+                temp_edge = mx_create_edge(island1, temp_distance);
+            }
+        }
+        printf("%s-%s,%d\n", island1, island2, temp_distance);
+    }
+    
+    for(int i = 0; i < parsed_islands; ++i) {
+        printf("Island #%d: %s\n", i+1, adjacency_list[i]->name);
+    }
 }
 
-int check_vertice_presence(t_vertice *ad_list, char *content, int vertices) {
+int check_vertice_presence(t_vertice **ad_list, char *content, int vertices) {
     int i = 0;
-
-    if(!ad_list) {
+    if(!ad_list)
         return -2;
-    }
     else {
         for(i = 0; i <= vertices; ++i) {
             if(i == vertices)
                 return -1;
-            else if(compare_names(&ad_list[i], content))
+            else if(compare_names(ad_list[i], content)) {
                 break;
+            }
         }
     }
     return i;
 }
 
-bool check_edge_presence(t_vertice *vertice, char *content) {
-    t_edge *temp_edge = vertice->edges;
-    while(temp_edge) {
-        if(!mx_strcmp(temp_edge->vertice_name, content))
+bool check_edge_presence(t_edge **edges, char *content) {
+    int i = 0;
+    while(edges[i]) {
+        if(!mx_strcmp(edges[i]->vertice_name, content))
             return true;
-        ++temp_edge; 
+        ++i;
     }
     return false;
 }
