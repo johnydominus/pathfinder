@@ -27,14 +27,19 @@ int mx_check_lines(char *str, int *iter) {
 }
 
 static int check_first_island(char *str, int *iter, int *line) {
+    int temp = *iter;
     while(true) {
         if(mx_isalpha(str[*iter])) {
             ++(*iter);
             continue; 
         }
         else if(str[*iter] == '-') {
-            ++(*iter);
-            break;
+            if(*iter == temp)
+                return *line;
+            else {
+                ++(*iter);
+                break;
+            }
         }
         else
             return *line;
@@ -43,14 +48,19 @@ static int check_first_island(char *str, int *iter, int *line) {
 }
 
 static int check_sec_island(char *str, int *iter, int *line) {
+    int temp = *iter;
     while (true) {
         if(mx_isalpha(str[*iter])) {
             ++(*iter); 
             continue;
         }
         else if(str[*iter] == ',') {
-            ++(*iter);
-            break;
+            if(*iter == temp)
+                return *line;
+            else {
+                ++(*iter);
+                break;
+            }
         }
         else
             return *line;      
@@ -59,14 +69,19 @@ static int check_sec_island(char *str, int *iter, int *line) {
 }
 
 static int check_path(char *str, int *iter, int *line) {
+    int temp = *iter;
     while (true) {
         if(mx_isdigit(str[*iter])) {
             ++(*iter);
             continue;
         }
         else if(str[*iter] && str[*iter] == '\n') {
-            ++(*iter);
-            break;
+            if(*iter == temp)
+                return *line;
+            else {
+                ++(*iter);
+                break;
+            }
         }
         else
             return *line;        

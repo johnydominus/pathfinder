@@ -7,11 +7,11 @@ main(){
         empty file              V
         first line              V
         some line               V
-        islands num             
+        islands num             V            
         
     parse vertices amount;      V
-    parse graph &&
-    create adjacency list;
+    parse graph &&              V
+    create adjacency list;      V
     use pathfinding algorithm;
     save right path;
     output the path;

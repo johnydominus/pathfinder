@@ -11,6 +11,7 @@ typedef struct s_edge
 typedef struct s_vertice {
     char *name;
     t_edge **edges;
+    int edges_num;
 } t_vertice;
 
 typedef enum e_error {
@@ -20,7 +21,8 @@ typedef enum e_error {
     INVALID_FIRST_LINE,
     INVALID_LINE,
     INVALID_ISLANDS_NUM,
-    WRONG_POINTER
+    WRONG_POINTER,
+    DUPLICATE_EDGE
 } t_error;
 
 int mx_check_first_line(char *str, int *iter);

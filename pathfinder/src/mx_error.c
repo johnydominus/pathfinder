@@ -27,8 +27,12 @@ void mx_error(t_error error_type, char *filename) {
             mx_printerr(" is not valid\n");
             break;
         case WRONG_POINTER:
-            mx_printerr("wrong pointer passed to a function\n");
+            mx_printerr("error: wrong pointer passed to a ");
+            mx_printerr(filename);
+            mx_printerr(" function\n");
             break;
+        case DUPLICATE_EDGE:
+            mx_printerr("error: duplicated edge\n");
         default:
             break;
     }

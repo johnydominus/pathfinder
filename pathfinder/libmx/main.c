@@ -164,7 +164,7 @@ int main (int argc, char *argv[]) {
         printf("User output:\n");
         printf("%d\n%d\n%d\n", mx_sqrt(25), mx_sqrt(207025), mx_sqrt(INT_MAX + 1));
 
-        printf("\n\n-----TESTING MX_NBR_TO_HEX-----\n\n");          //MX_NBR_TO_HEX
+/*        printf("\n\n-----TESTING MX_NBR_TO_HEX-----\n\n");          //MX_NBR_TO_HEX
 
         printf("Test output:\n");
         printf("%s\n%s\n%s\n%s\n\n", my_nbr_to_hex(52), my_nbr_to_hex(1000), my_nbr_to_hex(0), my_nbr_to_hex(10));
@@ -172,7 +172,7 @@ int main (int argc, char *argv[]) {
         printf("User output:\n");
         printf("%s\n%s\n%s\n%s\n\n", mx_nbr_to_hex(52), mx_nbr_to_hex(1000), mx_nbr_to_hex(0), mx_nbr_to_hex(10));
     }
-
+*/
     if(!mx_strcmp(argv[1], "mx_itoa") || !mx_strcmp(argv[1], "all")) {
         printf("\n\n-----TESTING MX_ITOA-----\n\n");                //MX_ITOA
 
@@ -191,7 +191,7 @@ int main (int argc, char *argv[]) {
                                         mx_itoa(INT_MAX + 1));
     }
 
-    if(!mx_strcmp(argv[1], "mx_quicksort") || !mx_strcmp(argv[1], "all")) {             
+ /*   if(!mx_strcmp(argv[1], "mx_quicksort") || !mx_strcmp(argv[1], "all")) {             
         test_header("MX_QUICKSORT");
         char *arr[] = {"Michelangelo", "Donatello", "Leonardo", "Raphael", NULL};
         char *arr1[] = {"DMC", "Clint Eastwood", "Dr Brown", "Einstein", "Jessica", "Beef Tannen", NULL};
@@ -209,7 +209,7 @@ int main (int argc, char *argv[]) {
         printf("\n%d\n", mx_quicksort(arr1, 0, 5));
         mx_print_strarr(arr1, &d);
     }
-
+*/
     if(!mx_strcmp(argv[1], "all"))
         printf("\n\n-----------------------\n|-----STRING PACK-----|\n-----------------------\n");
 
