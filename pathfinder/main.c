@@ -7,35 +7,70 @@ bool compare_edge_names(t_edge *edge, char *name);
 
 int main(int argc, char **argv) {
     int vertices;
-    int iter = 0;
+    int iter;
+    int len;
     char *file_data = NULL;
     t_vertice **adj_list = NULL;
 
-    if(!mx_check_errors(argc, argv, &iter, &file_data))
+    if(argc != 2) {
+        mx_error(INVALID_ARG_NUM, NULL);
         return 0;
-    //!
-    //if(!mx_parser(&file_data, &iter, &vertices, adj_list))
-    //    return 0;
-    iter = 0;                                           //writing line data to temp variables
+    }
+
+    len = open(argv[1], O_RDONLY);
+
+    if(len < 0) {
+        close(len);
+        mx_error(NO_FILE, argv[1]);
+        return 0;
+    }
+
+    file_data = mx_file_to_str(argv[1]);
+    close(len);
+
+    if(mx_strlen(file_data) == 0) {
+        mx_error(EMPTY_FILE, argv[1]);
+        return 0;
+    }
+    
+    if(mx_check_first_line(file_data, &iter) == false) {
+        mx_error(INVALID_FIRST_LINE, NULL);
+        return 0;
+    }
+    iter += 2;
+    
     vertices = mx_atoi(file_data);
-    if(vertices == 0)
+    if(vertices < 0) {
+        mx_error(INVALID_ISLANDS_NUM, NULL);
         return 0;
+    }
+    else if(vertices == 0)
+        return 0;
+
+    len = mx_check_lines(file_data, &iter);
+    if(len) {
+        mx_error(INVALID_LINE, mx_itoa(len));
+        return 0;
+    }
+
+    iter = 0;
+
     adj_list = malloc(sizeof(t_vertice*) * vertices);
+
     while(!mx_isalpha(file_data[iter]))
         ++iter;
-    
-    int parsed_isls = 0;                                //parsing data
+
+    int parsed_isls = 0;
     char *isl1 = NULL;
     char *isl2 = NULL;
     int temp_distance = 0;
-    int len;
 
     while(file_data[iter]) {
         if(parsed_isls > vertices) {
             mx_error(INVALID_ISLANDS_NUM, NULL);
             return 0;
         }
-        len = mx_strlen_delim(&file_data[iter], '-');
+        len = mx_strlen_delim(&file_data[iter], '-');           //writing line data to temp variables
         isl1 = mx_strndup(&file_data[iter], len);
         iter += ++len;
 
@@ -47,7 +82,7 @@ int main(int argc, char **argv) {
         while(file_data[iter] && !mx_isalpha(file_data[iter]))
             ++iter;
         
-        int x = check_vertice_presence(adj_list, isl1, parsed_isls);
+        int x = check_vertice_presence(adj_list, isl1, parsed_isls);    //parsing islands
         int y;
         if(x == -2)
             mx_error(WRONG_POINTER, "check_vertice_presence()");
@@ -57,7 +92,9 @@ int main(int argc, char **argv) {
             x = parsed_isls;
             ++parsed_isls;
         }
+        
         y = check_edge_presence(adj_list[x]->edges, isl1, adj_list[x]->edges_num);
+
         if(y == -2) {
             mx_error(WRONG_POINTER, "check_edge_presence()");
             return 0;
@@ -72,7 +109,7 @@ int main(int argc, char **argv) {
             mx_error(DUPLICATE_EDGE, NULL);
             return 0;
         }
-        
+
         x = check_vertice_presence(adj_list, isl2, parsed_isls);
         if(x == -2)
             mx_error(WRONG_POINTER, "check_vertice_presence()");
@@ -82,6 +119,7 @@ int main(int argc, char **argv) {
             x = parsed_isls;
             ++parsed_isls;
         }
+        
         y = check_edge_presence(adj_list[x]->edges, isl2, adj_list[x]->edges_num);
         if(y == -2) {
             mx_error(WRONG_POINTER, "check_edge_presence()");
@@ -102,8 +140,13 @@ int main(int argc, char **argv) {
         mx_error(INVALID_ISLANDS_NUM, NULL);
         return 0;
     }
-    
-       
+    printf("Parsed islands: %d\n", parsed_isls);
+    for(int i = 0; i < parsed_isls; ++i) {
+        for(int j = 0; j < adj_list[i]->edges_num; ++j) {
+            printf("%s-%s,%d\n", adj_list[i]->name, adj_list[i]->edges[j]->vertice_name, adj_list[i]->edges[j]->distance);
+        }
+        printf("-------\n");
+    }
 }
 
 int check_vertice_presence(t_vertice **ad_list, char *content, int verts) {

@@ -1,90 +1,82 @@
 #include "pathfinder.h"
 
-static int check_first_island(char *str, int *iter, int *line);
-static int check_sec_island(char *str, int *iter, int *line);
-static int check_path(char *str, int *iter, int *line);
+static bool check_first_island(char *str, int *iter);
+static bool check_sec_island(char *str, int *iter);
+static bool check_path(char *str, int *iter);
 
-int mx_check_lines(char *str, int *iter) {
+bool mx_check_lines(char *str, int *iter, int *vertices) {
     int line = 1;
-    int error = 0;
-
+    if(*vertices == 0 && !str[*iter] && !str[*iter + 1]) {
+        return false;
+    }
     while (true)
     {
         ++line;
-        error = check_first_island(str, iter, &line);
-        if(error) 
-            return error;
-        error = check_sec_island(str, iter, &line);
-        if(error) 
-            return error;
-        error = check_path(str, iter, &line);
-        if(error) 
-            return error;
+        if(check_first_island(str, iter) == false
+        || check_sec_island(str, iter) == false
+        || check_path(str, iter) == false) {
+            mx_error(INVALID_LINE, mx_itoa(line));
+            return false;
+        }
         if(!str[*iter]) 
             break;
     }
-    return 0;
+    return true;
 }
 
-static int check_first_island(char *str, int *iter, int *line) {
+static bool check_first_island(char *str, int *iter) {
     int temp = *iter;
     while(true) {
-        if(mx_isalpha(str[*iter])) {
+        if(mx_isalpha(str[*iter]))
             ++(*iter);
-            continue; 
-        }
         else if(str[*iter] == '-') {
             if(*iter == temp)
-                return *line;
+                return false;
             else {
                 ++(*iter);
                 break;
             }
         }
         else
-            return *line;
+            return false;
     }
-    return 0;
+    return true;
 }
 
-static int check_sec_island(char *str, int *iter, int *line) {
+static bool check_sec_island(char *str, int *iter) {
     int temp = *iter;
     while (true) {
-        if(mx_isalpha(str[*iter])) {
+        if(mx_isalpha(str[*iter]))
             ++(*iter); 
-            continue;
-        }
         else if(str[*iter] == ',') {
             if(*iter == temp)
-                return *line;
+                return false;
             else {
                 ++(*iter);
                 break;
             }
         }
         else
-            return *line;      
+            return false;
     }
-    return 0;
+    return true;
 }
 
-static int check_path(char *str, int *iter, int *line) {
+static bool check_path(char *str, int *iter) {
     int temp = *iter;
     while (true) {
-        if(mx_isdigit(str[*iter])) {
+        if(mx_isdigit(str[*iter]))
             ++(*iter);
-            continue;
-        }
         else if(str[*iter] && str[*iter] == '\n') {
             if(*iter == temp)
-                return *line;
+                return false;
             else {
                 ++(*iter);
                 break;
             }
         }
         else
-            return *line;        
+            return false;        
     }
-    return 0;
+    return true;
 }
