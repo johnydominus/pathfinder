@@ -10,8 +10,13 @@ SRC = ./main.c \
 	  ./mx_create_vertice.c \
 	  ./mx_error.c \
 	  ./mx_check_errors.c \
-	  ./mx_create_pathfinder.c \
-	  ./mx_parser.c
+	  ./mx_create_core.c \
+	  ./mx_parser.c \
+	  ./mx_check_vertice_presence.c \
+	  ./mx_check_edge_presence.c \
+	  ./mx_compare_vert_names.c \
+	  ./mx_compare_edge_names.c \
+	  ./mx_make_adj_matrix.c
 
 SRCS = ./src/main.c \
 	   ./src/mx_check_first_line.c \
@@ -20,8 +25,13 @@ SRCS = ./src/main.c \
 	   ./src/mx_create_vertice.c \
 	   ./src/mx_error.c \
 	   ./src/mx_check_errors.c \
-	   ./src/mx_create_pathfinder.c \
-	   ./src/mx_parser.c
+	   ./src/mx_create_core.c \
+	   ./src/mx_parser.c \
+	   ./src/mx_check_vertice_presence.c \
+	   ./src/mx_check_edge_presence.c \
+	   ./src/mx_compare_vert_names.c \
+	   ./src/mx_compare_edge_names.c \
+	   ./src/mx_make_adj_matrix.c
 
 OBJ = ./main.o \
 	  ./mx_check_first_line.o \
@@ -30,8 +40,13 @@ OBJ = ./main.o \
 	  ./mx_create_vertice.o \
 	  ./mx_error.o \
 	  ./mx_check_errors.o \
-	  ./mx_create_pathfinder.o \
-	  ./mx_parser.o
+	  ./mx_create_core.o \
+	  ./mx_parser.o \
+	  ./mx_check_vertice_presence.o \
+	  ./mx_check_edge_presence.o \
+	  ./mx_compare_vert_names.o \
+	  ./mx_compare_edge_names.o \
+	  ./mx_make_adj_matrix.o
 
 OBJO = ./obj/main.o \
 	   ./obj/mx_check_first_line.o \
@@ -40,8 +55,13 @@ OBJO = ./obj/main.o \
 	   ./obj/mx_create_vertice.o \
 	   ./obj/mx_error.o \
 	   ./obj/mx_check_errors.o \
-	   ./obj/mx_create_pathfinder.o \
-	   ./obj/mx_parser.o
+	   ./obj/mx_create_core.o \
+	   ./obj/mx_parser.o \
+	   ./obj/mx_check_vertice_presence.o \
+	   ./obj/mx_check_edge_presence.o \
+	   ./obj/mx_compare_vert_names.o \
+	   ./obj/mx_compare_edge_names.o \
+	   ./obj/mx_make_adj_matrix.o
 
 CFLGS = -g -std=c11 -Wall -Wpedantic -Werror -Wextra
 

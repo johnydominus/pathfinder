@@ -14,17 +14,16 @@ typedef struct s_vertice {
     int edges_num;
 } t_vertice;
 
-typedef struct s_pathfinder {
-    int vertices;
+typedef struct s_core {
+    int verts;
     int iter;
     int len;
-    int temp_distance;
-    int parsed_isls;
+    int distance;
+    int prsd_isls;
     char *isl1;
     char *isl2;
-    char *file_data;
-} t_pathfinder;
-
+    char *text;
+} t_core;
 
 typedef enum e_error {
     INVALID_ARG_NUM,
@@ -37,11 +36,16 @@ typedef enum e_error {
     DUPLICATE_EDGE
 } t_error;
 
-bool mx_parser(char **data, int *itr, int *verts, t_vertice **ad_lst);
+t_vertice *mx_create_vertice(const char *name, int vertices);
+t_edge *mx_create_edge(const char *vert_name, const int distance);
+t_core *mx_create_core(void);
+void mx_error(t_error error_type, char *filename);
+bool mx_parser(t_core *core, t_vertice ***ad_lst);
 bool mx_check_first_line(char *str, int *iter);
 bool mx_check_lines(char *str, int *iter, int *vertices);
 bool mx_check_errors(int argc, char **argv, int *iter, char **file_data);
-t_vertice *mx_create_vertice(const char *name, int vertices);
-t_edge *mx_create_edge(const char *vert_name, const int distance);
-t_pathfinder *mx_create_pathfinder(void);
-void mx_error(t_error error_type, char *filename);
+bool mx_compare_vert_names(t_vertice *vertice, char *name);
+bool mx_compare_edge_names(t_edge *edge, char *name);
+int mx_check_vertice_presence(t_vertice **ad_list, char *content, int verts);
+int mx_check_edge_presence(t_edge **edges, char *content, int edges_num);
+int **mx_make_adj_matrix(t_vertice **adj_list, int verts);
