@@ -16,7 +16,8 @@ SRC = ./main.c \
 	  ./mx_check_edge_presence.c \
 	  ./mx_compare_vert_names.c \
 	  ./mx_compare_edge_names.c \
-	  ./mx_make_adj_matrix.c
+	  ./mx_make_adj_matrix.c \
+	  ./mx_nparser.c
 
 SRCS = ./src/main.c \
 	   ./src/mx_check_first_line.c \
@@ -31,7 +32,8 @@ SRCS = ./src/main.c \
 	   ./src/mx_check_edge_presence.c \
 	   ./src/mx_compare_vert_names.c \
 	   ./src/mx_compare_edge_names.c \
-	   ./src/mx_make_adj_matrix.c
+	   ./src/mx_make_adj_matrix.c \
+	   ./src/mx_nparser.c
 
 OBJ = ./main.o \
 	  ./mx_check_first_line.o \
@@ -46,7 +48,8 @@ OBJ = ./main.o \
 	  ./mx_check_edge_presence.o \
 	  ./mx_compare_vert_names.o \
 	  ./mx_compare_edge_names.o \
-	  ./mx_make_adj_matrix.o
+	  ./mx_make_adj_matrix.o \
+	  ./mx_nparser.o
 
 OBJO = ./obj/main.o \
 	   ./obj/mx_check_first_line.o \
@@ -61,7 +64,8 @@ OBJO = ./obj/main.o \
 	   ./obj/mx_check_edge_presence.o \
 	   ./obj/mx_compare_vert_names.o \
 	   ./obj/mx_compare_edge_names.o \
-	   ./obj/mx_make_adj_matrix.o
+	   ./obj/mx_make_adj_matrix.o \
+	   ./obj/mx_nparser.o
 
 CFLGS = -g -std=c11 -Wall -Wpedantic -Werror -Wextra
 
