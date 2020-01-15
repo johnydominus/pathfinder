@@ -32,15 +32,11 @@ static bool init(t_core *core) {
     for(int i = 0; i < core->verts; ++i) {
         core->matrix[i] = (int*)malloc(sizeof(int) * core->verts);
         for(int j = 0; j < core->verts; ++j) 
-            core->matrix[i][j] = 0;
+            if(i == j)
+                core->matrix[i][j] = 0;
+            else
+                core->matrix[i][j] = 999999999;
     }
-    for(int i = 0; i < core->verts; ++i) {
-        for(int j = 0; j < core->verts; ++j) {
-            printf("%d ", core->matrix[i][j]);
-        }
-        printf("\n");
-    }
-    printf("-----\n");
     return true;
 }
 
@@ -48,8 +44,11 @@ static bool get_names_n_dstnce(t_core *core) {
     if(core->prsd_isls > core->verts) {
         mx_error(INVALID_ISLANDS_NUM, NULL);
         return false;
-    }   
-
+    }
+    if(core->isl1)
+        free(core->isl1);
+    if(core->isl2)
+        free(core->isl2);
     core->len = mx_strlen_delim(&core->text[core->iter], '-');
     core->isl1 = mx_strndup(&core->text[core->iter], core->len);
     core->iter += ++core->len;
@@ -59,7 +58,6 @@ static bool get_names_n_dstnce(t_core *core) {
     core->distance = mx_atoi(&core->text[core->iter]);
     while(core->text[core->iter] && !mx_isalpha(core->text[core->iter]))
         ++core->iter;
-    printf("Got data: %s,%s,%d\n", core->isl1, core->isl2, core->distance);
     return true;
 }
 
@@ -67,7 +65,6 @@ static bool parse_island(char *name, t_core *core) {
     for(int i = 0; i < core->verts; ++i) {
         if(core->names[i] == NULL) {
             core->names[i] = mx_strdup(name);
-            printf("%d island parsed: %s!\n", i + 1, core->names[i]);
             return true;
         }
         else if(!mx_strcmp(name, core->names[i])) {
@@ -89,8 +86,6 @@ static bool fill_matrix(t_core *core) {
                         if(!mx_strcmp(core->isl2, core->names[j])) {
                             core->matrix[i][j] = core->distance;
                             core->matrix[j][i] = core->distance;
-                            printf("Edge parsed: %s-%s,%d\n", core->names[i], core->names[j], core->matrix[i][j]);
-                            printf("Edge parsed: %s-%s,%d\n", core->names[j], core->names[i], core->matrix[j][i]);
                             return true;
                         }
                     }

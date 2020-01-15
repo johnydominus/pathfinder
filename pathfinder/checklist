@@ -12,11 +12,12 @@ main(){
     parse vertices amount;      V
     parse graph &&              V
     create adjacency list;      V
-    use pathfinding algorithm;
-    save right path;
-    output the path;
-    free allocated memory;
+    use pathfinding algorithm;	V
+    save right path;		V
+    output the path;		V
+    free allocated memory;	V
     auditor!
+    circular dependency
 };
 
 adjacency_list {
