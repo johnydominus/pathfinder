@@ -8,7 +8,6 @@ void mx_print_strarr(char **arr, const char *delim) {
         while(arr[i]) {
             if(i > 0)
                 mx_printstr(delim);
-
             mx_printstr(arr[i++]);
         }
         mx_printstr("\n");

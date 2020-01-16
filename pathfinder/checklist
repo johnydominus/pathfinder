@@ -16,7 +16,7 @@ main(){
     save right path;		V
     output the path;		V
     free allocated memory;	V
-    auditor!
+    auditor!                V
     circular dependency
 };
 

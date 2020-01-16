@@ -6,9 +6,7 @@ char *mx_strtrim_delim (const char *str, const char delim) {
 
     while (str[st_delims] == delim)
         st_delims++;
-
     while (str[end_delims - 1] == delim)
         end_delims--;
-
     return mx_strndup(&str[st_delims], end_delims - st_delims);
 }

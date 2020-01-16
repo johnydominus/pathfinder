@@ -12,7 +12,7 @@ t_core *mx_create_core(void) {
     new_core->isl2 = NULL;
     new_core->text = NULL;
     new_core->names = NULL;
-    for(i = 0; i < new_core->verts; ++i)
+    for (i = 0; i < new_core->verts; ++i)
         new_core->names[i] = NULL;
     new_core->matrix = NULL;   
     return new_core;

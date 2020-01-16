@@ -3,14 +3,12 @@
 int mx_get_char_index(const char *str, char c) {
     int cnt = 0;
 
-    if(str == NULL)
+    if (str == NULL)
         return -2;
-
-    while(str[cnt]) {
-        if(str[cnt] == c)
+    while (str[cnt]) {
+        if (str[cnt] == c)
             return cnt;
-        cnt++;    
+        cnt++;
     }
-
     return -1;
 }

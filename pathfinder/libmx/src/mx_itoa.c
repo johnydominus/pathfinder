@@ -1,5 +1,10 @@
 #include "libmx.h"
 
+static void check_minus(int *minus, int *number, int *len);
+static void define_len(int *temp, int *len);
+static void save_num(int *number, char *num, int *i);
+static void add_minus(int *minus, char *num, int *i);
+
 char *mx_itoa(int number) {
     int len = 1;
     int minus = 0;
@@ -12,30 +17,39 @@ char *mx_itoa(int number) {
     else if (number == 0)
         num = "0";
     else {
-        if ((minus = number) < 0) { 
-            len++;
-            number = -number;
-        }
-
+        check_minus(&minus, &number, &len);
         temp = number;
-
-        while ((temp / 10) > 0) {
-            len++;
-            temp /= 10;
-        }
-
+        define_len(&temp, &len);
         num = mx_strnew(len);
-
-        while (number != 0) {
-            num[i++] = number % 10 + '0';
-            number /= 10;
-        }
-
-        if (minus < 0)
-            num[i++] = '-';
-
+        save_num(&number, num, &i);
+        add_minus(&minus, num, &i);
         mx_str_reverse(num);
     }
-
     return num;
+}
+
+static void check_minus(int *minus, int *number, int *len) {
+    if ((*minus = *number) < 0) { 
+        (*len)++;
+        *number = -(*number);
+    }
+}
+
+static void define_len(int *temp, int *len) {
+    while ((*temp / 10) > 0) {
+        (*len)++;
+        *temp /= 10;
+    }
+}
+
+static void save_num(int *number, char *num, int *i) {
+    while (*number != 0) {
+        num[(*i)++] = *number % 10 + '0';
+        *number /= 10;
+    }    
+}
+
+static void add_minus(int *minus, char *num, int *i) {
+        if (*minus < 0)
+            num[(*i)++] = '-';
 }

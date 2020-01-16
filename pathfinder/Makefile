@@ -11,7 +11,8 @@ SRC = ./main.c \
 	  ./mx_create_core.c \
 	  ./mx_nparser.c \
 	  ./mx_pathfinder.c \
-	  ./mx_free_everything.c
+	  ./mx_free_everything.c \
+	  ./mx_print.c
 
 SRCS = ./src/main.c \
 	   ./src/mx_check_first_line.c \
@@ -21,7 +22,8 @@ SRCS = ./src/main.c \
 	   ./src/mx_create_core.c \
 	   ./src/mx_nparser.c \
 	   ./src/mx_pathfinder.c \
-	   ./src/mx_free_everything.c
+	   ./src/mx_free_everything.c \
+	   ./src/mx_print.c
 
 OBJ = ./main.o \
 	  ./mx_check_first_line.o \
@@ -31,7 +33,8 @@ OBJ = ./main.o \
 	  ./mx_create_core.o \
 	  ./mx_nparser.o \
 	  ./mx_pathfinder.o \
-	  ./mx_free_everything.o
+	  ./mx_free_everything.o \
+	  ./mx_print.o
 
 OBJO = ./obj/main.o \
 	   ./obj/mx_check_first_line.o \
@@ -41,14 +44,15 @@ OBJO = ./obj/main.o \
 	   ./obj/mx_create_core.o \
 	   ./obj/mx_nparser.o \
 	   ./obj/mx_pathfinder.o \
-	   ./obj/mx_free_everything.o
+	   ./obj/mx_free_everything.o \
+	   ./obj/mx_print.o
 
 CFLGS = -g -std=c11 -Wall -Wpedantic -Werror -Wextra
 
 all: install clean
 
 install:
-	@cd libmx && make -f Makefile install
+	@make -C libmx/ -f Makefile install
 	@cp $(INC) $(INCLIB) $(SRCS) .
 	@clang $(CFLGS) -c $(SRC)
 	@mkdir obj
@@ -56,14 +60,14 @@ install:
 	@clang $(CFLGS) $(OBJO) libmx/libmx.a -o $(NAME)
 
 clean:
-	@cd libmx && make -f Makefile clean
+	@make -C libmx/ -f Makefile clean
 	@rm -rf $(OBJ) $(OBJO) $(SRC) $(HEADTMP)
 	@rm -rf ./obj
 	@rm -rf libmx.a
 	@rm -rf ./libmx/obj
 
 uninstall: clean
-	@cd libmx && make -f Makefile uninstall
+	@make -C libmx/ -f Makefile uninstall
 	@rm -rf $(NAME)
 
 reinstall: uninstall all

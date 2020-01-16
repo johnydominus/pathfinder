@@ -8,19 +8,17 @@ char *mx_del_extra_spaces(const char *str) {
     char *iter = res;
     int j = 0;
 
-    if(!str)
+    if (!str)
         return NULL;
-
-    for(int i = 0; i < mx_strlen(pre); ++i) {
-        if(mx_isspace(pre[i]) && mx_isspace(pre[i + 1])) {}
+    for (int i = 0; i < mx_strlen(pre); ++i) {
+        if (mx_isspace(pre[i]) && mx_isspace(pre[i + 1])) {}
         else {
-            if(mx_isspace(pre[i])) 
+            if (mx_isspace(pre[i]))
                 iter[j++] = ' ';
             else 
                 iter[j++] = pre[i];
         }
     }
-
     return res;
 }
 
@@ -28,18 +26,15 @@ static int final_length(const char *s) {
     int spaces = 0;
     int len = 0;
 
-    while(*s) {
-        if(spaces) {}
+    while (*s) {
+        if (spaces) {}
         else
             ++len;
-
         if (mx_isspace(*s))
             ++spaces;
         else
             spaces = 0;
-
         ++s;
     }
-
     return len;
 }

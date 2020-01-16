@@ -2,11 +2,10 @@
 
 void mx_del_strarr(char ***arr) {
     char **temp = *arr;
-    char ***tempp = arr;
+    int i = 0;
 
-    while(**tempp != NULL)
-        mx_strdel((temp)++);
-
+    while(temp[i] != NULL)
+        mx_strdel(&temp[i++]);
     free(temp);
     *arr = NULL;
 }

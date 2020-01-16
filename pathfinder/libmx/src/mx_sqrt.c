@@ -5,13 +5,12 @@ int mx_sqrt(int x) {
     int res = 0;
     int b = x;
 
-    while(x > 0){
+    while (x > 0) {
         x -=div;
         div +=2;
         res += x < 0 ? 0 : 1;
     }
-
-    if(res * res == b)
+    if (res * res == b)
         return res;
     else
         return 0;
