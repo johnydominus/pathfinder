@@ -1,58 +1,91 @@
 cd ..
-echo comlile
+echo compile
 make clean
 make
 cp pathfinder ./tests/pathfinder
 cd ./tests
 
-echo test1 no arguments
-./pathfinder 2> ./res/res.txt
+echo test0: 0 islands
+./pathfinder invalid0 > ./res/res.txt
+./pathfinder_LMS invalid0 > ./res/rests.txt
+diff ./res/rests.txt ./res/res.txt
+
+echo test1: no arguments
+./pathfinder > ./res/res.txt
+./pathfinder_LMS > ./res/tst1.txt
 diff ./res/tst1.txt ./res/res.txt
 
-echo test2 no file
-./pathfinder islands 2> ./res/res.txt
+echo test2: no file
+./pathfinder islands > ./res/res.txt
+./pathfinder_LMS islands > ./res/tst2.txt
 diff ./res/tst2.txt ./res/res.txt
 
-echo test3 empty file
-./pathfinder empty.txt 2> ./res/res.txt
+echo test3: empty file
+./pathfinder empty.txt > ./res/res.txt
+./pathfinder_LMS empty.txt > ./res/tst3.txt
 diff ./res/tst3.txt ./res/res.txt
 
-echo test4 invalid1
-./pathfinder invalid1 2> ./res/res.txt
+echo test4: invalid1
+./pathfinder invalid1 > ./res/res.txt
+./pathfinder_LMS invalid1 > ./res/tst4.txt
 diff ./res/tst4.txt ./res/res.txt
 
-echo test5 invalid2
-./pathfinder invalid2 2> ./res/res.txt
+echo test5: invalid2
+./pathfinder invalid2 > ./res/res.txt
+./pathfinder_LMS invalid2 > ./res/tst5.
 diff ./res/tst5.txt ./res/res.txt
 
-echo test6 invalid3
-./pathfinder invalid3 2> ./res/res.txt
+echo test6: invalid3
+./pathfinder invalid3 > ./res/res.txt
+./pathfinder_LMS invalid3 > ./res/tst6.txt
 diff ./res/tst6.txt ./res/res.txt
 
-echo test7 example1
+echo test7: example1
 ./pathfinder example1 > ./res/res.txt
+./pathfinder_LMS example1 > ./res/tst7.txt
 diff ./res/tst7.txt ./res/res.txt
 
-echo test8 example2
+echo test8: example2
 ./pathfinder example2 > ./res/res.txt
+./pathfinder_LMS example2 > ./res/tst8.txt
 diff ./res/tst8.txt ./res/res.txt
 
-echo test9 easy
+echo test9: easy
 ./pathfinder easy > ./res/res.txt
+./pathfinder_LMS easy > ./res/tst9.txt
 diff ./res/tst9.txt ./res/res.txt
 
-echo test10 medium
+echo test10: medium
 ./pathfinder medium > ./res/res.txt
+./pathfinder_LMS medium > ./res/tst10.txt
 diff ./res/tst10.txt ./res/res.txt
 
-echo test11 hard
+echo test11: hard
 ./pathfinder hard > ./res/res.txt
+./pathfinder_LMS hard > ./res/tst11.txt
 diff ./res/tst11.txt ./res/res.txt
 
-echo test12 hardest
+echo test12: hardest
 ./pathfinder hardest > ./res/res.txt
+./pathfinder_LMS hardest > ./res/tst12.txt
 diff ./res/tst12.txt ./res/res.txt
 
-echo test13 invalid4
-./pathfinder invalid4 2> ./res/res.txt
+echo test13: invalid4
+./pathfinder invalid4 > ./res/res.txt
+./pathfinder_LMS invalid4 > ./res/tst13.txt
 diff ./res/tst13.txt ./res/res.txt
+
+echo test 14: directory
+./pathfinder res > ./res/res.txt
+./pathfinder_LMS res > ./res/rests.txt
+diff ./res/rests.txt ./res/res.txt
+
+echo test 15: test1
+./pathfinder test1.txt > ./res/res.txt
+./pathfinder_LMS test1.txt > ./res/rests.txt
+diff ./res/rests.txt ./res/res.txt
+
+echo test 16: test2
+./pathfinder test2.txt > ./res/res.txt
+./pathfinder_LMS test2.txt > ./res/rests.txt
+diff ./res/rests.txt ./res/res.txt
