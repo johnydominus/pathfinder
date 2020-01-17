@@ -51,7 +51,7 @@ static void restore_path(t_core *core, t_stack *st, int **d_m) {
                 }
             }
         }
-    }   
+    }
 }
 
 static bool is_next(t_core *core, t_stack *st, int next, int **d_m) {
@@ -70,7 +70,8 @@ static bool is_next(t_core *core, t_stack *st, int next, int **d_m) {
 
 static void create_path(t_core *core, int i, int j, int **dist_matrix) {
     t_stack *stack = (t_stack*)malloc(sizeof(t_stack));
-    if ((stack) == NULL) 
+
+    if ((stack) == NULL)
         exit(1);
     stack->max_size = core->verts;
     stack->path = malloc(stack->max_size * sizeof(int) + 1);

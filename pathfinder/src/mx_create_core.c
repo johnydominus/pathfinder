@@ -2,7 +2,7 @@
 
 t_core *mx_create_core(void) {
     t_core *new_core = malloc(sizeof(t_core));
-    int i;
+
     new_core->verts = 0;
     new_core->iter = 0;
     new_core->len = 0;
@@ -12,8 +12,8 @@ t_core *mx_create_core(void) {
     new_core->isl2 = NULL;
     new_core->text = NULL;
     new_core->names = NULL;
-    for (i = 0; i < new_core->verts; ++i)
+    for (int i = 0; i < new_core->verts; ++i)
         new_core->names[i] = NULL;
-    new_core->matrix = NULL;   
+    new_core->matrix = NULL;
     return new_core;
 }

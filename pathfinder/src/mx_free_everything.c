@@ -1,8 +1,7 @@
 #include "pathfinder.h"
 
 void mx_free_everything(t_core *core) {
-    int i;
-    for (i = 0; i < core->verts; ++i) {
+    for (int i = 0; i < core->verts; ++i) {
         free(core->names[i]);
         free(core->matrix[i]);
     }

@@ -41,4 +41,3 @@ bool mx_nparser(t_core *core);
 bool mx_check_first_line(char *str, int *iter);
 bool mx_check_lines(char *str, int *iter, int *vertices);
 bool mx_check_errors(int argc, char **argv, int *iter, char **file_data);
-

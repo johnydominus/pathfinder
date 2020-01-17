@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-int mx_isspace(char c){
+int mx_isspace(char c) {
     if (c == ' '  ||
         c == '\t' ||
         c == '\r' ||
@@ -11,4 +11,3 @@ int mx_isspace(char c){
     else
         return 0;
 }
-

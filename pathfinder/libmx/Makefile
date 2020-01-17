@@ -266,21 +266,22 @@ OBJO = ./obj/mx_sort_list.o \
 
 CFLGS = -g -c -std=c11 -Wall -Wextra -Wpedantic -Werror 
 
-all: install clean
+all: install
 
 install:
-	@cp $(INC) $(SRCS) .
-	@clang $(CFLGS) -c  $(SRC)
-	@mkdir  obj
-	@mv $(OBJ) ./obj
-	@ar -rc $(NAME) $(OBJO)
+	@cp $(SRCS) $(INC) .
+	@clang $(CFLAGS) -c $(SRC) $(INC)
+	@ar -rc $(NAME) $(OBJ)
+	@mkdir -p obj
+	@mv $(OBJ) obj
+
+uninstall: clean
+	@rm -rf $(NAME)
+	@rm -rf obj
+	@rm -rf a.out
+	@rm -rf inc/libmx.h.gch
 
 clean:
-	@rm -rf $(OBJO) $(SRC) $(HEADTMP)
-	@rm -rf ./obj
+	@rm -rf $(OBJ) $(SRC) $(HEADTMP)
 
-uninstall: 
-	@rm -rf $(NAME)
-
-install: uninstall clean all
-
+reinstall: uninstall install

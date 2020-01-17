@@ -32,7 +32,7 @@ static bool init(t_core *core) {
     for (int i = 0; i < core->verts; ++i) {
         core->matrix[i] = (int*)malloc(sizeof(int) * core->verts);
         core->names[i] = NULL;
-        for (int j = 0; j < core->verts; ++j) 
+        for (int j = 0; j < core->verts; ++j)
             if (i == j)
                 core->matrix[i][j] = 0;
             else
