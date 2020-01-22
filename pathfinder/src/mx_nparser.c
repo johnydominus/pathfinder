@@ -17,6 +17,10 @@ bool mx_nparser(t_core *core) {
             return false;
         }
     }
+    if (core->prsd_isls < core->verts) {
+        mx_error(INVALID_ISLANDS_NUM, NULL);
+        return false; 
+    }
     return true;
 }
 
@@ -66,6 +70,7 @@ static bool parse_island(char *name, t_core *core) {
     for (int i = 0; i < core->verts; ++i) {
         if (core->names[i] == NULL) {
             core->names[i] = mx_strdup(name);
+            core->prsd_isls += 1;
             return true;
         }
         else if (!mx_strcmp(name, core->names[i]))
@@ -75,13 +80,10 @@ static bool parse_island(char *name, t_core *core) {
 }
 
 static bool fill_matrix(t_core *core) {
-    int i;
-    int j;
-
-    for (i = 0; i < core->verts; ++i) {
+    for (int i = 0; i < core->verts; ++i) {
         if (core->names[i] != NULL) {
             if (!mx_strcmp(core->isl1, core->names[i])) {
-                for (j = 0; j < core->verts; ++j) {
+                for (int j = 0; j < core->verts; ++j) {
                     if (core->names[j] != NULL) {
                         if (!mx_strcmp(core->isl2, core->names[j])) {
                             core->matrix[i][j] = core->distance;

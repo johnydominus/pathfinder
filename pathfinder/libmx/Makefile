@@ -74,7 +74,7 @@ SRCS = ./src/mx_atoi.c \
 	   ./src/mx_isdigit.c \
 	   ./src/mx_isalpha.c \
 	   ./src/mx_printerr.c \
-       	   ./src/mx_sort_list.c \
+       ./src/mx_sort_list.c \
 	   ./src/mx_list_size.c \
 	   ./src/mx_pop_back.c \
 	   ./src/mx_pop_front.c \
