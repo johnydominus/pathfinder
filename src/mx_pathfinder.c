@@ -37,12 +37,13 @@ static void floyd_marchall_alg(t_core *core, int **dist_matrix) {
 }
 
 static void restore_path(t_core *core, t_stack *st, int **d_m) {
-    if (st->path[st->size] == st->path[0])
-        mx_print(core, st);
+    if (st->path[st->size] == st->path[0]) {
+        core->stacks[core->st_num++] = st;
+    }
     else {
         for (int next = 0; next < core->verts; ++next) {
             if (is_next(core, st, next, d_m)) {
-                if (st->size < st->max_size) {
+                if (st->size < core->verts) {
                     st->size++;
                     st->path[st->size] = next;
                     restore_path(core, st, d_m);
@@ -73,8 +74,9 @@ static void create_path(t_core *core, int i, int j, int **dist_matrix) {
 
     if ((stack) == NULL)
         exit(1);
-    stack->max_size = core->verts;
-    stack->path = malloc(stack->max_size * sizeof(int) + 1);
+    stack->path = malloc(core->verts * sizeof(int) + 2);
+    for (int i = 0; i < core->verts + 2; ++i)
+        stack->path[i] = -1;
     stack->path[0] = i;
     stack->path[1] = j;
     stack->size = 1;

@@ -2,17 +2,24 @@
 
 #include "libmx.h"
 
+typedef struct s_stack {
+        int *path;
+        int size;
+} t_stack;
+
 typedef struct s_core {
     int verts;
     int iter;
     int len;
     int distance;
     int prsd_isls;
+    int st_num;
     char *isl1;
     char *isl2;
     char *text;
     char **names;
     int **matrix;
+    t_stack **stacks;
 } t_core;
 
 typedef enum e_error {
@@ -25,12 +32,6 @@ typedef enum e_error {
     WRONG_POINTER,
     DUPLICATE_EDGE
 } t_error;
-
-typedef struct s_stack{
-        int *path;
-        int size;
-        int max_size;
-    } t_stack;
 
 t_core *mx_create_core(void);
 void mx_error(t_error error_type, char *filename);

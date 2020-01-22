@@ -17,7 +17,10 @@ main(){
     output the path;		V
     free allocated memory;	V
     auditor!                V
-    circular dependency
+    circular dependency     V
+    rewrite stack to list
+    sort lists
+    output paths from lists 
 };
 
 adjacency_list {
