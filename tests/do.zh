@@ -53,59 +53,59 @@ diff -y ./res/rests.txt ./res/res.txt
 echo test 9: directory as an argument
 ./pathfinder res > ./res/res.txt
 ./pathfinder_unit res > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
 
 echo test10: example1
 ./pathfinder example1 > ./res/res.txt
 ./pathfinder_unit example1 > ./res/tst7.txt
-diff ./res/tst7.txt ./res/res.txt
+diff -y ./res/tst7.txt ./res/res.txt
 
 echo test11: example2
 ./pathfinder example2 > ./res/res.txt
 ./pathfinder_unit example2 > ./res/tst8.txt
-diff ./res/tst8.txt ./res/res.txt
+diff -y ./res/tst8.txt ./res/res.txt
 
 echo test12: example3
 ./pathfinder example3 > ./res/res.txt
 ./pathfinder_unit example3 > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
 
 echo test13: example4
 ./pathfinder example4 > ./res/res.txt
 ./pathfinder_unit example4 > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
 
 echo test14: example5
 ./pathfinder example5 > ./res/res.txt
 ./pathfinder_unit example5 > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
 
 echo test15: easy
 ./pathfinder easy > ./res/res.txt
 ./pathfinder_unit easy > ./res/tst9.txt
-diff ./res/tst9.txt ./res/res.txt
+diff -y ./res/tst9.txt ./res/res.txt
 
 echo test16: medium
 ./pathfinder medium > ./res/res.txt
 ./pathfinder_unit medium > ./res/tst10.txt
-diff ./res/tst10.txt ./res/res.txt
+diff -y ./res/tst10.txt ./res/res.txt
 
 echo test17: hard
 ./pathfinder hard > ./res/res.txt
 ./pathfinder_unit hard > ./res/tst11.txt
-diff ./res/tst11.txt ./res/res.txt
+diff -y ./res/tst11.txt ./res/res.txt
 
 echo test18: hardest
 ./pathfinder hardest > ./res/res.txt
 ./pathfinder_unit hardest > ./res/tst12.txt
-diff ./res/tst12.txt ./res/res.txt
+diff -y ./res/tst12.txt ./res/res.txt
 
 echo test 19: test1
 ./pathfinder test1.txt > ./res/res.txt
 ./pathfinder_unit test1.txt > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
 
 echo test 20: test2
 ./pathfinder test2.txt > ./res/res.txt
 ./pathfinder_unit test2.txt > ./res/rests.txt
-diff ./res/rests.txt ./res/res.txt
+diff -y ./res/rests.txt ./res/res.txt
