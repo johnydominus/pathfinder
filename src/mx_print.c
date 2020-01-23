@@ -26,39 +26,40 @@ static void print_line(void) {
 
 static void print_path(t_core *core, t_stack *st) {
     mx_printstr("Path: ");
-    mx_printstr(core->names[st->path[0]]);
-    mx_printstr(" -> ");
     mx_printstr(core->names[st->path[1]]);
+    mx_printstr(" -> ");
+    mx_printstr(core->names[st->path[0]]);
     mx_printstr("\n");
 }
 
 static void print_route(t_core *core, t_stack *st) {
     mx_printstr("Route: ");
-    for (int i = st->size; i >= 2; --i) {
+    for (int i = 1; i <= st->size; ++i) {
         mx_printstr(core->names[st->path[i]]);
-        mx_printstr(" -> ");
+        if (i < st->size)
+            mx_printstr(" -> ");
+        else
+            mx_printstr("\n");
     }
-    mx_printstr(core->names[st->path[1]]);
-    mx_printstr("\n");
 }
 
 static void print_distance(t_core *core, t_stack *st) {
     mx_printstr("Distance: ");
     int total_dist = 0;
-    for (int i = st->size - 1; i >= 2; --i) {
-        int dist = core->matrix[st->path[i]][st->path[i + 1]];
-        total_dist += dist;
-        mx_printint(dist);
-        mx_printstr(" + ");
+    int n = st->size;
+    if (n == 2)
+        mx_printint(core->matrix[st->path[n]][st->path[n - 1]]);
+    else {
+        for (int i = 1; i < n; ++i) {
+            mx_printint(core->matrix[st->path[i]][st->path[i + 1]]);
+            total_dist += core->matrix[st->path[i]][st->path[i + 1]];
+            if (i + 1 < n)
+                mx_printstr(" + ");
+            else {
+                mx_printstr(" = ");
+                mx_printint(total_dist);
+            }
+        }
     }
-    if (total_dist != 0) {
-        int dist = core->matrix[st->path[2]][st->path[1]];
-        total_dist += dist;
-        mx_printint(dist);
-        mx_printstr(" = ");
-    }
-    else
-        total_dist = core->matrix[st->path[2]][st->path[1]];
-    mx_printint(total_dist);
     mx_printstr("\n");
 }

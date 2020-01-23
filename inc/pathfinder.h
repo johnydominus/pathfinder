@@ -13,13 +13,11 @@ typedef struct s_core {
     int len;
     int distance;
     int prsd_isls;
-    int st_num;
     char *isl1;
     char *isl2;
     char *text;
     char **names;
     int **matrix;
-    t_list **stacks;
 } t_core;
 
 typedef enum e_error {
@@ -42,4 +40,3 @@ bool mx_nparser(t_core *core);
 bool mx_check_first_line(char *str, int *iter);
 bool mx_check_lines(char *str, int *iter, int *vertices);
 bool mx_check_errors(int argc, char **argv, int *iter, char **file_data);
-bool mx_compare_stacks(t_stack *st1, t_stack *st2);

@@ -14,7 +14,7 @@ void mx_pathfinder(t_core *core) {
     }
     floyd_marchall_alg(core, dist_matrix);
     for (int i = 0; i < core->verts; ++i) {
-        for (int j = i + 1; j < core->verts; ++j)
+        for (int j = 0; j < core->verts; ++j)
             create_path(core, i, j, dist_matrix);
     }
     for(int i = 0; i < core->verts; ++i)
@@ -36,10 +36,8 @@ static void floyd_marchall_alg(t_core *core, int **dist_matrix) {
 }
 
 static void restore_path(t_core *core, t_stack *st, int **d_m) {
-    if (st->path[st->size] == st->path[0]) {
-        mx_push_back(core->stacks, st);
+    if (st->path[st->size] == st->path[0])
         mx_print(core, st);
-    }
     else {
         for (int next = 0; next < core->verts; ++next) {
             if (is_next(core, st, next, d_m)) {
@@ -56,25 +54,29 @@ static void restore_path(t_core *core, t_stack *st, int **d_m) {
 }
 
 static bool is_next(t_core *core, t_stack *st, int next, int **d_m) {
-    int k = st->path[st->size];
-    int i = st->path[0];
+    int i = st->path[st->size];
+    int j = st->path[0];
     int **AM = core->matrix;
     int **DM = d_m;
 
-    if (k != next) {
-        if (DM[i][k] - AM[k][next] == DM[i][next])
+    if (i != next) {
+        if (AM[i][next] == DM[j][i] - DM[j][next])
             return true;
     }
     return false;
 }
 
 static void create_path(t_core *core, int i, int j, int **dist_matrix) {
-    t_stack *stack = (t_stack*)malloc(sizeof(t_stack));
-    if ((stack) == NULL)
-        exit(1);
-    stack->path = (int*)malloc(core->verts * sizeof(int) + 1);
-    stack->path[0] = i;
-    stack->path[1] = j;
-    stack->size = 1;
-    restore_path(core, stack, dist_matrix);
+    if(i < j) {
+        t_stack *stack = (t_stack*)malloc(sizeof(t_stack));
+        if ((stack) == NULL)
+            exit(1);
+        stack->path = (int*)malloc(core->verts * sizeof(int));
+        stack->path[0] = j;
+        stack->path[1] = i;
+        stack->size = 1;
+        restore_path(core, stack, dist_matrix);
+        free(stack->path);
+        free(stack);
+    }
 }

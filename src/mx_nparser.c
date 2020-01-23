@@ -27,8 +27,6 @@ bool mx_nparser(t_core *core) {
 static bool init(t_core *core) {
     core->iter = 0;
     core->verts = mx_atoi(core->text);
-    core->stacks = (t_list**)malloc(sizeof(t_list**));
-    *(core->stacks) = NULL;
     if (core->verts == 0)
         return false;
     while (!mx_isalpha(core->text[core->iter]))

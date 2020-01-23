@@ -11,7 +11,7 @@ bool mx_check_errors(int argc, char **argv, int *iter, char **file_data) {
     if(!check_argc(argc)
        || !check_file(argv, *file_data)
        || !mx_check_first_line(*file_data, iter)
-       || !check_vertices(*file_data, &vertices) 
+       || !check_vertices(*file_data, &vertices)
        || !mx_check_lines(*file_data, iter, &vertices)) {
         return false;
     }
