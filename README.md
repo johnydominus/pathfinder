@@ -25,32 +25,32 @@ island1-island2,length_of_bridge .
 
 # Output
 Output consist of information blocks about certain shortest path. Every block contains:
-1. ======================================== upper boundary that consist of 40 =
+1. "========================================" upper boundary that consist of 40 '='
 characters;
 2. Path: <island1> -> <island2> - shows initial point and final destination;
 3. Route: <island1> -> <all_islands_between> -> <island2> - shows the full route
 between two islands;
 4. Distance: <length1> + <length2> = <sum> - shows the distance between every island in
 the route as well as their sum that indicates distance to the final destination;
-5. ======================================== bottom boundary that consist of 40 =
+5. "========================================" bottom boundary that consist of 40 '='
 characters.
 
 # Error handling. 
 Prints on the standard error stream:
 
-• usage: ./pathfinder [filename] , if there are an invalid number of command-line
+• "usage: ./pathfinder [filename]" , if there are an invalid number of command-line
 arguments;
 
-• error: file [filename] does not exist , if the file does not exist;
+• "error: file [filename] does not exist" , if the file does not exist;
 
-• error: file [filename] is empty , if the file is empty;
+• "error: file [filename] is empty" , if the file is empty;
 
-• error: line 1 is not valid , if the first line contains something other than digits;
+• "error: line 1 is not valid" , if the first line contains something other than digits;
 
-• error: line [line_number] is not valid , if one of the remaining lines does not match
+• "error: line [line_number] is not valid" , if one of the remaining lines does not match
 the format above;
 
-• error: invalid number of islands , if the number received on the first line does not
+• "error: invalid number of islands" , if the number received on the first line does not
 coincide with the number of islands.
 
 # Libmx
