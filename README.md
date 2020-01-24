@@ -43,8 +43,6 @@ arguments;
 
 • error: file [filename] does not exist , if the file does not exist;
 
-PathFinder | Track C > 5
-
 • error: file [filename] is empty , if the file is empty;
 
 • error: line 1 is not valid , if the first line contains something other than digits;
