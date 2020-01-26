@@ -1,5 +1,7 @@
-# pathfinder
-Pathfinder &amp;&amp; libmx
+# Pathfinder 
+Including libmx library
+
+# OS: MacOS, Linux
 
 A program that finds all the shortest paths between all the islands,
 using information about the bridges that connect them. So, the program:
