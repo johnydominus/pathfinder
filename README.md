@@ -1,4 +1,4 @@
-# Pathfinder 
+# Pathfinder
 Including libmx library
 
 OS: MacOS, Linux
@@ -37,7 +37,7 @@ the route as well as their sum that indicates distance to the final destination;
 5. "========================================" bottom boundary that consist of 40 '='
 characters.
 
-# Error handling. 
+# Error handling 
 Prints on the standard error stream:
 
 • "usage: ./pathfinder [filename]" , if there are an invalid number of command-line
@@ -56,4 +56,4 @@ the format above;
 coincide with the number of islands.
 
 # Libmx
-The project also consists "libmx" library, that have a lot of useful functions in it. Names of functions quite mnemonic, so you can figure out what function does by reading it's name. A bit later I'll make more detailed info about this library.
+The project also consists "libmx" library, that have a lot of useful functions in it. Names of functions quite mnemonic and respond to their standart-library analogs, so you can figure out what function does by reading it's name. A bit later I'll make more detailed info about this library.
